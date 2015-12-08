@@ -1,9 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com2002ug25;
+
+import java.beans.Statement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
  *
@@ -11,13 +11,21 @@ package com2002ug25;
  */
 public class COM2002UG25 {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        
-        test commit;
-    }
-    
+public static void main(String[] args) throws SQLException {
+
+String DB="jdbc:mysql://stusql.dcs.shef.ac.uk/team025?user=team025&password=a2dc8801";
+
+Connection con = null; 
+try { 
+ con = DriverManager.getConnection(DB);
 }
+catch (SQLException ex) {
+ ex.printStackTrace();
+}
+finally {
+ if (con != null) con.close();
+}
+    
+ 
+}
+}  
