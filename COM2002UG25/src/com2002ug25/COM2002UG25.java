@@ -17,7 +17,7 @@ public class COM2002UG25 {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        test commit
+        test commit;
     }
     
 }
