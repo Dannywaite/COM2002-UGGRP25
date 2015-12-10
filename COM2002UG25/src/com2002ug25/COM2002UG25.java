@@ -42,6 +42,25 @@ finally {
 }
 }
 
+public static void registerAddress(String number, String street, String district, String city, String postcode, Connection con) throws SQLException{
+    number = number;
+    street = street;
+    city = city;
+    postcode = postcode;
+ Statement stmt = null; 
+ try {
+ stmt = (Statement) con.createStatement(); // create from open connection
+ int count = stmt.executeUpdate("INSERT INTO address" + "(number, street, district, city, postcode) VALUES ('" +number+"', '"+street+"', '"+district+ "', '"+city+ "', '"+postcode+"')");  //('pls','1995-06-18','07889965789','86','S11 1NU', NULL)")
+
+}
+catch (SQLException ex) {
+ ex.printStackTrace();
+}
+finally {
+ if (stmt != null) stmt.close();
+}
+}
+
 
 
 
@@ -62,7 +81,8 @@ catch (SQLException ex) {
  ex.printStackTrace();
 }
 
-registerPatient("Danny","1995-07-18","07889965789","86","S10 1NU","Maintenance", con);
+//registerPatient("Danny","1995-07-18","07889965789","86","S10 1NU","Maintenance", con);
+registerAddress("1231a","Mappin Street","adsdasd","Sheffield","S1 1AA",con);
 
 
 /*
