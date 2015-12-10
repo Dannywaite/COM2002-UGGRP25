@@ -57,6 +57,8 @@ public static void subscribePatient(String name, String number, String postcode,
  
  stmt.executeUpdate("UPDATE patients SET plan ='"+plan+"', plan_start_date = '"+planStartDate+"', rem_checkup = '"+checkupRem+"', rem_hygiene = '"+hygieneRem+"', rem_repair = '"+repairRem+"' WHERE number = '"+number+"' AND postcode = '"+postcode+"' AND name = '"+name+"'");
 
+<<<<<<< HEAD
+=======
 }
 catch (SQLException ex) {
  ex.printStackTrace();
@@ -104,8 +106,35 @@ finally {
 }
 
 
+>>>>>>> f1bae0a7bed35d3ab475d855c9ad85f29d1699eb
 public static void main(String[] args) throws SQLException {
+    String DB="jdbc:mysql://stusql.dcs.shef.ac.uk/team025?user=team025&password=a2dc8801";
 
+    Connection con = null; 
+    try { 
+     con = DriverManager.getConnection(DB);
+     System.out.println("connectsuccess");
+    }
+    catch (SQLException ex) {
+     ex.printStackTrace();
+    }
+    /*
+    finally {
+    if (con != null) con.close();
+    System.out.println("closed");
+    }
+    */
+  
+     java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Patientreg().setVisible(true);
+            }
+        });
+    
+    registerPatient("Danny","1995-07-18","07889965789","86","S10 1NU","Maintenance", con);
+
+<<<<<<< HEAD
+=======
 String DB="jdbc:mysql://stusql.dcs.shef.ac.uk/team025?user=team025&password=a2dc8801";
 
 Connection con = null; 
@@ -160,5 +189,6 @@ finally {
 
 //System.out.println(person.toString());
  
+>>>>>>> f1bae0a7bed35d3ab475d855c9ad85f29d1699eb
 }
 }  
