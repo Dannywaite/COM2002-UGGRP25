@@ -4,15 +4,20 @@ import java.sql.Statement;
 import java.sql.Connection;
 import static java.sql.Date.valueOf;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 
 /**
  *
  * @author fea13dw
  */
 public class COM2002UG25 {
+    private static String checkupRem;
+    private static String hygieneRem;
+    private static String repairRem;
     public String name;
     public String bday;
     public String phoneno;
@@ -21,17 +26,36 @@ public class COM2002UG25 {
     public String plan;
     public Connection con;
     
-public static void registerPatient(String name, String bday, String phoneno, String housenum, String postcode, String plan, Connection con) throws SQLException{
-    name = name;
-    bday = bday;
-    phoneno = phoneno;
-    housenum = housenum;
-    postcode = postcode;
-    plan = plan;
- Statement stmt = null; 
+public static void registerPatient(String name, String bday, String phoneno, String housenum, String postcode, Connection con) throws SQLException{
+ 
+ Statement stmt = null;  
  try {
  stmt = (Statement) con.createStatement(); // create from open connection
- int count = stmt.executeUpdate("INSERT INTO patients" + "(name, dob, contact, number, postcode, plan) VALUES ('" +name+"', '"+bday+"', '"+phoneno+ "', '"+housenum+"', '"+postcode+"', '"+plan+"')");  //('pls','1995-06-18','07889965789','86','S11 1NU', NULL)")
+ stmt.executeUpdate("INSERT INTO patients" + "(name, dob, contact, number, postcode, plan, plan_start_date, rem_checkup, rem_hygiene, rem_repair) VALUES ('"+name+"', '"+bday+"', '"+phoneno+ "', '"+housenum+"', '"+postcode+"', NULL, NULL, '0','0','0')");
+}
+catch (SQLException ex) {
+ ex.printStackTrace();
+}
+finally {
+ if (stmt != null) stmt.close();
+}
+}
+
+public static void subscribePatient(String name, String number, String postcode, String plan, Connection con) throws SQLException{
+
+ String planStartDate = getTodaysDate();
+ 
+ Statement stmt = null;  
+ try {
+ stmt = (Statement) con.createStatement(); // create from open connection
+ ResultSet res = stmt.executeQuery("SELECT coverage_checkup,coverage_hygiene,coverage_repair FROM plan WHERE name = '"+plan+"'");
+ while (res.next()) {
+  checkupRem = Integer.toString(res.getInt(1));
+  hygieneRem = Integer.toString(res.getInt(2));
+  repairRem = Integer.toString(res.getInt(3));
+ }
+ 
+ stmt.executeUpdate("UPDATE patients SET plan ='"+plan+"', plan_start_date = '"+planStartDate+"', rem_checkup = '"+checkupRem+"', rem_hygiene = '"+hygieneRem+"', rem_repair = '"+repairRem+"' WHERE number = '"+number+"' AND postcode = '"+postcode+"' AND name = '"+name+"'");
 
 }
 catch (SQLException ex) {
@@ -42,11 +66,42 @@ finally {
 }
 }
 
+public static void unsubscribePatient(String name, String number, String postcode, Connection con) throws SQLException {
+ 
+ Statement stmt = null;  
+ try {
+ stmt = (Statement) con.createStatement(); // create from open connection 
+ stmt.executeUpdate("UPDATE patients SET plan =NULL, plan_start_date = NULL, rem_checkup = '0', rem_hygiene = '0', rem_repair = '0' WHERE number = '"+number+"' AND postcode = '"+postcode+"' AND name = '"+name+"'");
+}
+catch (SQLException ex) {
+ ex.printStackTrace();
+}
+finally {
+ if (stmt != null) stmt.close();
+}   
+}
 
+public static String getTodaysDate() {
+    SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+    Date today = new Date();
+    String todaysDate = sdfDate.format(today);
+    return todaysDate;
+}
 
+public static void registerAddress(String number, String street, String district, String city, String postcode, Connection con) throws SQLException{
 
-
-
+ Statement stmt = null; 
+ try {
+ stmt = (Statement) con.createStatement(); // create from open connection
+ stmt.executeUpdate("INSERT INTO address" + "(number, street, district, city, postcode) VALUES ('" +number+"', '"+street+"', '"+district+ "', '"+city+ "', '"+postcode+"')");  //('pls','1995-06-18','07889965789','86','S11 1NU', NULL)")
+}
+catch (SQLException ex) {
+ ex.printStackTrace();
+}
+finally {
+ if (stmt != null) stmt.close();
+}
+}
 
 
 public static void main(String[] args) throws SQLException {
@@ -62,7 +117,11 @@ catch (SQLException ex) {
  ex.printStackTrace();
 }
 
-registerPatient("Danny","1995-07-18","07889965789","86","S10 1NU","Maintenance", con);
+//registerAddress("16.6","Encliffe Vale Road","Endcliffe","Sheffield","S10 3EW",con);
+registerPatient("Jonathan Gray","1993-05-21","07871632238","16.6","S10 3EW", con);
+subscribePatient("Jonathan Gray","16.6","S10 3EW","Oral Health", con);
+unsubscribePatient("Jonathan Gray","16.6","S10 3EW",con);
+
 
 
 /*
