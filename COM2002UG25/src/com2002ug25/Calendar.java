@@ -50,6 +50,9 @@ public class Calendar extends javax.swing.JFrame {
         wedHyg = new javax.swing.JPanel();
         thuHyg = new javax.swing.JPanel();
         friHyg = new javax.swing.JPanel();
+
+        
+                
         newAppointment = new javax.swing.JButton();
         Patients = new javax.swing.JButton();
 
@@ -312,16 +315,31 @@ public class Calendar extends javax.swing.JFrame {
         );
 
         allCalendars.addTab("Hygienist", hygienistCal);
+        
+        
 
         newAppointment.setText("New Appointment");
         newAppointment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newAppointmentActionPerformed(evt);
+               NewAppointment newA =  new NewAppointment(new javax.swing.JFrame(), true);
+               newA.main();
+                /*newAppointmentActionPerformed(evt);*/
             }
         });
+        
+        
 
         Patients.setText("Patients");
+        Patients.addActionListener(new java.awt.event.ActionListener(){
+            public void actionPerformed(java.awt.event.ActionEvent evt){
+                  Patients newP = new Patients (new javax.swing.JFrame(),true);
+                  newP.main();
+            }
 
+        });
+        
+        
+        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -413,4 +431,5 @@ public class Calendar extends javax.swing.JFrame {
     private javax.swing.JPanel wedDen;
     private javax.swing.JPanel wedHyg;
     // End of variables declaration//GEN-END:variables
+    
 }
