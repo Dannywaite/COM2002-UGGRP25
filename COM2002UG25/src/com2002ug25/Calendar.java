@@ -321,9 +321,11 @@ public class Calendar extends javax.swing.JFrame {
         newAppointment.setText("New Appointment");
         newAppointment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-               NewAppointment newA =  new NewAppointment(new javax.swing.JFrame(), true);
-               newA.main();
-                /*newAppointmentActionPerformed(evt);*/
+               java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new NewAppointment().setVisible(true);
+            }
+        });
             }
         });
         
@@ -332,7 +334,7 @@ public class Calendar extends javax.swing.JFrame {
         Patients.setText("Patients");
         Patients.addActionListener(new java.awt.event.ActionListener(){
             public void actionPerformed(java.awt.event.ActionEvent evt){
-                  Patients newP = new Patients (new javax.swing.JFrame(),true);
+                  Patients newP = new Patients ();
                   newP.main();
             }
 
