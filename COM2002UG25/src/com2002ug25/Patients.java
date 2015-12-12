@@ -14,7 +14,7 @@ public class Patients extends javax.swing.JFrame {
     /**
      * Creates new form Patients
      */
-    public Patients() {
+    public Patients(java.awt.Frame parent, boolean modal) {
         initComponents();
     }
 
@@ -33,7 +33,7 @@ public class Patients extends javax.swing.JFrame {
         healthplan = new javax.swing.JButton();
         patientList = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Patients");
 
         regPatient.setText("Register New Patient");
@@ -114,7 +114,7 @@ public class Patients extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -141,7 +141,14 @@ public class Patients extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Patients().setVisible(true);
+                Patients dialog = new Patients(new javax.swing.JFrame(),true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter(){
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e){
+                        dialog.setVisible(false);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }

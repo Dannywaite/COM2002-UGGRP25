@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package com2002ug25;
-
+import java.util.*;
+import java.text.SimpleDateFormat;
 /**
  *
  * @author Peter
@@ -276,7 +277,7 @@ public class NewAppointment extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -307,7 +308,7 @@ public class NewAppointment extends javax.swing.JDialog {
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
+                        dialog.setVisible(false);
                     }
                 });
                 dialog.setVisible(true);

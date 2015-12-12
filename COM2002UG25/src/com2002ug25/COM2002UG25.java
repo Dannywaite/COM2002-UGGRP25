@@ -179,12 +179,12 @@ public static void main(String[] args) throws SQLException {
     Connection con = null; 
     
 try { 
-con = DriverManager.getConnection(DB);
+//con = DriverManager.getConnection(DB);
 System.out.println("connectsuccess");
 
      java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Patientreg().setVisible(true);
+                new Calendar().setVisible(true);
             }
         });
  
