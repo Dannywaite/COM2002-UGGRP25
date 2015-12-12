@@ -28,7 +28,6 @@ public class NewAppointment extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
         appointmentWith = new javax.swing.ButtonGroup();
         partnerLabel = new javax.swing.JLabel();
         patientName = new javax.swing.JTextField();
@@ -38,26 +37,26 @@ public class NewAppointment extends javax.swing.JDialog {
         DOBLabel = new javax.swing.JLabel();
         patientRadio = new javax.swing.JRadioButton();
         timeOffRadio = new javax.swing.JRadioButton();
-        DOBDay = new javax.swing.JComboBox<>();
-        DOBMonth = new javax.swing.JComboBox<>();
-        DOBYear = new javax.swing.JComboBox<>();
+        DOBDay = new javax.swing.JComboBox<String>();
+        DOBMonth = new javax.swing.JComboBox<String>();
+        DOBYear = new javax.swing.JComboBox<String>();
         houseNumberLabel = new javax.swing.JLabel();
         postcodeLabel = new javax.swing.JLabel();
         startTimeLabel = new javax.swing.JLabel();
         typeLabel = new javax.swing.JLabel();
         durationLabel = new javax.swing.JLabel();
-        startTimeHour = new javax.swing.JComboBox<>();
-        startTimeMinute = new javax.swing.JComboBox<>();
-        jLabel9 = new javax.swing.JLabel();
-        appointmentType = new javax.swing.JComboBox<>();
+        startTimeHour = new javax.swing.JComboBox<String>();
+        startTimeMinute = new javax.swing.JComboBox<String>();
+        timeSeparator = new javax.swing.JLabel();
+        appointmentType = new javax.swing.JComboBox<String>();
         duration = new javax.swing.JTextField();
-        partner = new javax.swing.JComboBox<>();
+        partner = new javax.swing.JComboBox<String>();
         confirmButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        appointmentDay = new javax.swing.JComboBox<>();
-        appointmentMonth = new javax.swing.JComboBox<>();
-        appointmentYear = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
+        appointmentDay = new javax.swing.JComboBox<String>();
+        appointmentMonth = new javax.swing.JComboBox<String>();
+        appointmentYear = new javax.swing.JComboBox<String>();
+        dateLabel = new javax.swing.JLabel();
         appointment = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -90,11 +89,11 @@ public class NewAppointment extends javax.swing.JDialog {
             }
         });
 
-        DOBDay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "31", "30", "29", "28", "27", "26", "25", "24", "23", "22", "21", "20", "19", "18", "17", "16", "15", "14", "13", "12", "11", "10", "09", "08", "07", "06", "05", "04", "03", "02", "01" }));
+        DOBDay.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31", "30", "29", "28", "27", "26", "25", "24", "23", "22", "21", "20", "19", "18", "17", "16", "15", "14", "13", "12", "11", "10", "09", "08", "07", "06", "05", "04", "03", "02", "01" }));
 
-        DOBMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "12", "11", "10", "09", "08", "07", "06", "05", "04", "03", "02", "01" }));
+        DOBMonth.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12", "11", "10", "09", "08", "07", "06", "05", "04", "03", "02", "01" }));
 
-        DOBYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950", "1949", "1948", "1947", "1946", "1945", "1944", "1943", "1942", "1941", "1940", "1939", "1938", "1937", "1936", "1935", "1934", "1933", "1932", "1931", "1930", "1929", "1928", "1927", "1926", "1925", "1924", "1923", "1922", "1921", "1920", "1919", "1918", "1917", "1916", "1915", "1914", "1913", "1912", "1911", "1910", "1909", "1908", "1907", "1906", "1905", "1904", "1903", "1902", "1901", "1900" }));
+        DOBYear.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950", "1949", "1948", "1947", "1946", "1945", "1944", "1943", "1942", "1941", "1940", "1939", "1938", "1937", "1936", "1935", "1934", "1933", "1932", "1931", "1930", "1929", "1928", "1927", "1926", "1925", "1924", "1923", "1922", "1921", "1920", "1919", "1918", "1917", "1916", "1915", "1914", "1913", "1912", "1911", "1910", "1909", "1908", "1907", "1906", "1905", "1904", "1903", "1902", "1901", "1900" }));
 
         houseNumberLabel.setText("House No.");
 
@@ -106,32 +105,32 @@ public class NewAppointment extends javax.swing.JDialog {
 
         durationLabel.setText("Duration");
 
-        startTimeHour.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "09", "10", "11", "12", "13", "14", "15", "16", "17" }));
+        startTimeHour.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09", "10", "11", "12", "13", "14", "15", "16", "17" }));
         startTimeHour.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 startTimeHourActionPerformed(evt);
             }
         });
 
-        startTimeMinute.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "10", "20", "30", "40", "50" }));
+        startTimeMinute.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "10", "20", "30", "40", "50" }));
 
-        jLabel9.setText(":");
+        timeSeparator.setText(":");
 
-        appointmentType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Treatment", "Checkup" }));
+        appointmentType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Treatment", "Checkup" }));
 
-        partner.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dentist", "Hygienist" }));
+        partner.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Dentist", "Hygienist" }));
 
         confirmButton.setText("Confirm");
 
         cancelButton.setText("Cancel");
 
-        appointmentDay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "31", "30", "29", "28", "27", "26", "25", "24", "23", "22", "21", "20", "19", "18", "17", "16", "15", "14", "13", "12", "11", "10", "09", "08", "07", "06", "05", "04", "03", "02", "01" }));
+        appointmentDay.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31", "30", "29", "28", "27", "26", "25", "24", "23", "22", "21", "20", "19", "18", "17", "16", "15", "14", "13", "12", "11", "10", "09", "08", "07", "06", "05", "04", "03", "02", "01" }));
 
-        appointmentMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "12", "11", "10", "09", "08", "07", "06", "05", "04", "03", "02", "01" }));
+        appointmentMonth.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12", "11", "10", "09", "08", "07", "06", "05", "04", "03", "02", "01" }));
 
-        appointmentYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950", "1949", "1948", "1947", "1946", "1945", "1944", "1943", "1942", "1941", "1940", "1939", "1938", "1937", "1936", "1935", "1934", "1933", "1932", "1931", "1930", "1929", "1928", "1927", "1926", "1925", "1924", "1923", "1922", "1921", "1920", "1919", "1918", "1917", "1916", "1915", "1914", "1913", "1912", "1911", "1910", "1909", "1908", "1907", "1906", "1905", "1904", "1903", "1902", "1901", "1900" }));
+        appointmentYear.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950", "1949", "1948", "1947", "1946", "1945", "1944", "1943", "1942", "1941", "1940", "1939", "1938", "1937", "1936", "1935", "1934", "1933", "1932", "1931", "1930", "1929", "1928", "1927", "1926", "1925", "1924", "1923", "1922", "1921", "1920", "1919", "1918", "1917", "1916", "1915", "1914", "1913", "1912", "1911", "1910", "1909", "1908", "1907", "1906", "1905", "1904", "1903", "1902", "1901", "1900" }));
 
-        jLabel1.setText("Date");
+        dateLabel.setText("Date");
 
         appointment.setText("Appointment");
 
@@ -162,7 +161,7 @@ public class NewAppointment extends javax.swing.JDialog {
                                     .addComponent(patientNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(houseNumberLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(postcodeLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(dateLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(appointment, javax.swing.GroupLayout.Alignment.TRAILING))))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,7 +179,7 @@ public class NewAppointment extends javax.swing.JDialog {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(startTimeHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel9)
+                                    .addComponent(timeSeparator)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(startTimeMinute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(postcode)
@@ -233,12 +232,12 @@ public class NewAppointment extends javax.swing.JDialog {
                     .addComponent(appointmentDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(appointmentMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(appointmentYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(dateLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(startTimeHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(startTimeMinute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
+                    .addComponent(timeSeparator)
                     .addComponent(startTimeLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -327,15 +326,13 @@ public class NewAppointment extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> appointmentType;
     private javax.swing.ButtonGroup appointmentWith;
     private javax.swing.JComboBox<String> appointmentYear;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton confirmButton;
+    private javax.swing.JLabel dateLabel;
     private javax.swing.JTextField duration;
     private javax.swing.JLabel durationLabel;
     private javax.swing.JTextField houseNumber;
     private javax.swing.JLabel houseNumberLabel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JComboBox<String> partner;
     private javax.swing.JLabel partnerLabel;
     private javax.swing.JTextField patientName;
@@ -347,6 +344,7 @@ public class NewAppointment extends javax.swing.JDialog {
     private javax.swing.JLabel startTimeLabel;
     private javax.swing.JComboBox<String> startTimeMinute;
     private javax.swing.JRadioButton timeOffRadio;
+    private javax.swing.JLabel timeSeparator;
     private javax.swing.JLabel typeLabel;
     // End of variables declaration//GEN-END:variables
 }
