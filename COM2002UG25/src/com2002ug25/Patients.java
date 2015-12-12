@@ -14,7 +14,7 @@ public class Patients extends javax.swing.JFrame {
     /**
      * Creates new form Patients
      */
-    public Patients(java.awt.Frame parent, boolean modal) {
+    public Patients() {
         initComponents();
     }
 
@@ -168,7 +168,7 @@ public class Patients extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Patients dialog = new Patients(new javax.swing.JFrame(),true);
+                Patients dialog = new Patients();
                 dialog.addWindowListener(new java.awt.event.WindowAdapter(){
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e){
