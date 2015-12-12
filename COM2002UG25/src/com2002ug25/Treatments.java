@@ -41,7 +41,9 @@ public class Treatments extends javax.swing.JDialog {
 
         treatmentList.setBackground(new java.awt.Color(255, 255, 255));
 
-        jCheckBox1.setText("Treatment A");
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+
+        jCheckBox1.setText("Treatment A - Date - Cost - Covered by Plan?");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -80,7 +82,7 @@ public class Treatments extends javax.swing.JDialog {
             }
         });
 
-        removeTreatment.setText("Remove Treatment");
+        removeTreatment.setText("Remove Treatments");
 
         totalCost.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -103,7 +105,7 @@ public class Treatments extends javax.swing.JDialog {
                 .addComponent(addTreatment)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(removeTreatment)
-                .addGap(0, 164, Short.MAX_VALUE))
+                .addGap(0, 160, Short.MAX_VALUE))
             .addComponent(totalCost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         menuLayout.setVerticalGroup(
