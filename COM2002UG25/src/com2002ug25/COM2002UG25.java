@@ -6,8 +6,7 @@ import static java.sql.Date.valueOf;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 import java.text.SimpleDateFormat;
 
 /**
@@ -18,6 +17,10 @@ public class COM2002UG25 {
     private static String checkupRem;
     private static String hygieneRem;
     private static String repairRem;
+    private static String patientId;
+    private static int numberOfTreatments;
+    private static String patientPlan;
+    private static int modifiedTreatmentCost;
     public String name;
     public String bday;
     public String phoneno;
@@ -41,6 +44,7 @@ finally {
 }
 }
 
+//takes a patient's name, house number and postcode and a plan and subscribes them to it
 public static void subscribePatient(String name, String number, String postcode, String plan, Connection con) throws SQLException{
 
  String planStartDate = getTodaysDate();
@@ -54,12 +58,9 @@ public static void subscribePatient(String name, String number, String postcode,
   hygieneRem = Integer.toString(res.getInt(2));
   repairRem = Integer.toString(res.getInt(3));
  }
- 
  stmt.executeUpdate("UPDATE patients SET plan ='"+plan+"', plan_start_date = '"+planStartDate+"', rem_checkup = '"+checkupRem+"', rem_hygiene = '"+hygieneRem+"', rem_repair = '"+repairRem+"' WHERE number = '"+number+"' AND postcode = '"+postcode+"' AND name = '"+name+"'");
+ }
 
-<<<<<<< HEAD
-=======
-}
 catch (SQLException ex) {
  ex.printStackTrace();
 }
@@ -68,6 +69,7 @@ finally {
 }
 }
 
+//takes a patient's name, house number and post code and unsubscribes them from their healthplan.
 public static void unsubscribePatient(String name, String number, String postcode, Connection con) throws SQLException {
  
  Statement stmt = null;  
@@ -94,7 +96,7 @@ public static void registerAddress(String number, String street, String district
 
  Statement stmt = null; 
  try {
- stmt = (Statement) con.createStatement(); // create from open connection
+ //stmt = (Statement) con.createStatement(); // create from open connection
  stmt.executeUpdate("INSERT INTO address" + "(number, street, district, city, postcode) VALUES ('" +number+"', '"+street+"', '"+district+ "', '"+city+ "', '"+postcode+"')");  //('pls','1995-06-18','07889965789','86','S11 1NU', NULL)")
 }
 catch (SQLException ex) {
@@ -105,60 +107,102 @@ finally {
 }
 }
 
+//takes a patient's name, house number and postcode. Creates list of outstanding treatment names, list of costs and total cost.
+public static void showTreatments(String name, String number, String postcode, Connection con) throws SQLException{
 
->>>>>>> f1bae0a7bed35d3ab475d855c9ad85f29d1699eb
+ Statement stmt = null; 
+ try {
+ ResultSet res1 = stmt.executeQuery("SELECT patientId FROM patients WHERE name = '"+name+"' AND number = '"+number+"' AND postcode = '"+postcode+"'");
+ while (res1.next()) {
+ patientId = res1.getString(1);
+ }
+ 
+ ResultSet res2 = stmt.executeQuery("SELECT count(*) FROM outstanding_treatments WHERE patientId = '"+patientId+"'");
+ while (res2.next()) {
+ numberOfTreatments = res2.getInt(1);
+ }
+ 
+ ResultSet res3 = stmt.executeQuery("SELECT name FROM outstanding_treatments WHERE patientId = '"+patientId+"'");
+ ArrayList <String> listOfTreatmentNames = new ArrayList();
+ while (res3.next()) {
+     for (int i=1; i<(numberOfTreatments+1); i++)
+        listOfTreatmentNames.add(res3.getString(i));
+ }
+ 
+ ResultSet res4 = stmt.executeQuery("SELECT cost FROM outstanding_treatments WHERE patientId = '"+patientId+"'");
+ ArrayList <Integer> listOfTreatmentCosts = new ArrayList();
+ while (res4.next()) {
+     for (int i=1; i<(numberOfTreatments+1); i++)
+        listOfTreatmentCosts.add(res4.getInt(i));
+ }
+ int totalTreatmentCost = listOfTreatmentCosts.stream().mapToInt(Integer::intValue).sum();
+ System.out.println ("Treatments: "+listOfTreatmentNames);
+ System.out.println ("Costs: "+listOfTreatmentCosts);
+ System.out.println ("Total: "+totalTreatmentCost);
+ 
+ ResultSet res5 = stmt.executeQuery("SELECT plan FROM patients WHERE patientId = '"+patientId+"'");
+ while (res5.next()) {
+ patientPlan = res5.getString(1);
+ }
+ 
+ if ("NULL".equals(patientPlan)){
+     int modifiedTreatmentCost = totalTreatmentCost;
+    }
+ else{
+ ResultSet res6 = stmt.executeQuery("SELECT type FROM outstanding_treatments WHERE patientId = '"+patientId+"'");
+ ArrayList <String> listOfTreatmentTypes = new ArrayList();
+ while (res6.next()) {
+     for (int i=1; i<(numberOfTreatments+1); i++)
+        listOfTreatmentTypes.add(res4.getString(i));
+ }
+ ArrayList <Treatment> fullTreatmentlist = new ArrayList();
+     
+     
+      
+}
+
+ System.out.println ("Total inc. plan coverage: "+modifiedTreatmentCost);
+}
+
+catch (SQLException ex) {
+ ex.printStackTrace();
+}
+finally {
+ if (stmt != null) stmt.close();
+}
+}
+
+
 public static void main(String[] args) throws SQLException {
     String DB="jdbc:mysql://stusql.dcs.shef.ac.uk/team025?user=team025&password=a2dc8801";
 
     Connection con = null; 
-    try { 
-     con = DriverManager.getConnection(DB);
-     System.out.println("connectsuccess");
-    }
-    catch (SQLException ex) {
-     ex.printStackTrace();
-    }
-    /*
-    finally {
-    if (con != null) con.close();
-    System.out.println("closed");
-    }
-    */
-  
+    
+try { 
+con = DriverManager.getConnection(DB);
+System.out.println("connectsuccess");
+
      java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Patientreg().setVisible(true);
             }
         });
-    
-    registerPatient("Danny","1995-07-18","07889965789","86","S10 1NU","Maintenance", con);
-
-<<<<<<< HEAD
-=======
-String DB="jdbc:mysql://stusql.dcs.shef.ac.uk/team025?user=team025&password=a2dc8801";
-
-Connection con = null; 
-try { 
- con = DriverManager.getConnection(DB);
- System.out.println("connectsuccess");
-}
-catch (SQLException ex) {
- ex.printStackTrace();
-}
-
+ 
 //registerAddress("16.6","Encliffe Vale Road","Endcliffe","Sheffield","S10 3EW",con);
 registerPatient("Jonathan Gray","1993-05-21","07871632238","16.6","S10 3EW", con);
 subscribePatient("Jonathan Gray","16.6","S10 3EW","Oral Health", con);
 unsubscribePatient("Jonathan Gray","16.6","S10 3EW",con);
 
+}
+catch (SQLException ex) {
+ ex.printStackTrace();
+}
 
-
-/*
 finally {
  if (con != null) con.close();
  System.out.println("closing");
 }
-*/
+
 /*
 String name = "Danny";
 String bday = "1995";
@@ -189,6 +233,5 @@ finally {
 
 //System.out.println(person.toString());
  
->>>>>>> f1bae0a7bed35d3ab475d855c9ad85f29d1699eb
 }
 }  
