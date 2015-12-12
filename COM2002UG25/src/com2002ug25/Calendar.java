@@ -27,33 +27,34 @@ public class Calendar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        DaysDent = new javax.swing.JPanel();
+        allCalendars = new javax.swing.JTabbedPane();
+        dentistCal = new javax.swing.JPanel();
         daysDen = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jSplitPane2 = new javax.swing.JSplitPane();
         timesDen = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
+        appointmentsDen = new javax.swing.JPanel();
         monDen = new javax.swing.JPanel();
         tueDen = new javax.swing.JPanel();
         wedDen = new javax.swing.JPanel();
         thuDen = new javax.swing.JPanel();
         friDen = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        hygienistCal = new javax.swing.JPanel();
         daysHyg = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jSplitPane1 = new javax.swing.JSplitPane();
         timesHyg = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
+        appointmentsHyg = new javax.swing.JPanel();
         monHyg = new javax.swing.JPanel();
         tueHyg = new javax.swing.JPanel();
         wedHyg = new javax.swing.JPanel();
         thuHyg = new javax.swing.JPanel();
         friHyg = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        newAppointment = new javax.swing.JButton();
+        Patients = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Calendar");
 
         daysDen.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -83,7 +84,7 @@ public class Calendar extends javax.swing.JFrame {
 
         jSplitPane2.setLeftComponent(timesDen);
 
-        jPanel7.setLayout(new java.awt.GridLayout(1, 0));
+        appointmentsDen.setLayout(new java.awt.GridLayout(1, 0));
 
         monDen.setPreferredSize(new java.awt.Dimension(100, 20));
 
@@ -98,7 +99,7 @@ public class Calendar extends javax.swing.JFrame {
             .addGap(0, 520, Short.MAX_VALUE)
         );
 
-        jPanel7.add(monDen);
+        appointmentsDen.add(monDen);
 
         tueDen.setBackground(new java.awt.Color(250, 250, 250));
         tueDen.setPreferredSize(new java.awt.Dimension(100, 20));
@@ -114,7 +115,7 @@ public class Calendar extends javax.swing.JFrame {
             .addGap(0, 520, Short.MAX_VALUE)
         );
 
-        jPanel7.add(tueDen);
+        appointmentsDen.add(tueDen);
 
         wedDen.setPreferredSize(new java.awt.Dimension(100, 20));
 
@@ -129,7 +130,7 @@ public class Calendar extends javax.swing.JFrame {
             .addGap(0, 520, Short.MAX_VALUE)
         );
 
-        jPanel7.add(wedDen);
+        appointmentsDen.add(wedDen);
 
         thuDen.setBackground(new java.awt.Color(250, 250, 250));
         thuDen.setPreferredSize(new java.awt.Dimension(100, 20));
@@ -145,7 +146,7 @@ public class Calendar extends javax.swing.JFrame {
             .addGap(0, 520, Short.MAX_VALUE)
         );
 
-        jPanel7.add(thuDen);
+        appointmentsDen.add(thuDen);
 
         friDen.setPreferredSize(new java.awt.Dimension(100, 20));
 
@@ -160,28 +161,28 @@ public class Calendar extends javax.swing.JFrame {
             .addGap(0, 520, Short.MAX_VALUE)
         );
 
-        jPanel7.add(friDen);
+        appointmentsDen.add(friDen);
 
-        jSplitPane2.setRightComponent(jPanel7);
+        jSplitPane2.setRightComponent(appointmentsDen);
 
         jScrollPane1.setViewportView(jSplitPane2);
 
-        javax.swing.GroupLayout DaysDentLayout = new javax.swing.GroupLayout(DaysDent);
-        DaysDent.setLayout(DaysDentLayout);
-        DaysDentLayout.setHorizontalGroup(
-            DaysDentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout dentistCalLayout = new javax.swing.GroupLayout(dentistCal);
+        dentistCal.setLayout(dentistCalLayout);
+        dentistCalLayout.setHorizontalGroup(
+            dentistCalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
             .addComponent(daysDen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        DaysDentLayout.setVerticalGroup(
-            DaysDentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DaysDentLayout.createSequentialGroup()
+        dentistCalLayout.setVerticalGroup(
+            dentistCalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dentistCalLayout.createSequentialGroup()
                 .addComponent(daysDen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1))
         );
 
-        jTabbedPane1.addTab("Dentist", DaysDent);
+        allCalendars.addTab("Dentist", dentistCal);
 
         daysHyg.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -211,8 +212,8 @@ public class Calendar extends javax.swing.JFrame {
 
         jSplitPane1.setLeftComponent(timesHyg);
 
-        jPanel8.setBackground(new java.awt.Color(200, 200, 200));
-        jPanel8.setLayout(new java.awt.GridLayout(1, 0));
+        appointmentsHyg.setBackground(new java.awt.Color(200, 200, 200));
+        appointmentsHyg.setLayout(new java.awt.GridLayout(1, 0));
 
         monHyg.setPreferredSize(new java.awt.Dimension(100, 20));
 
@@ -227,7 +228,7 @@ public class Calendar extends javax.swing.JFrame {
             .addGap(0, 520, Short.MAX_VALUE)
         );
 
-        jPanel8.add(monHyg);
+        appointmentsHyg.add(monHyg);
 
         tueHyg.setBackground(new java.awt.Color(250, 250, 250));
         tueHyg.setPreferredSize(new java.awt.Dimension(100, 20));
@@ -243,7 +244,7 @@ public class Calendar extends javax.swing.JFrame {
             .addGap(0, 520, Short.MAX_VALUE)
         );
 
-        jPanel8.add(tueHyg);
+        appointmentsHyg.add(tueHyg);
 
         wedHyg.setPreferredSize(new java.awt.Dimension(100, 20));
 
@@ -258,7 +259,7 @@ public class Calendar extends javax.swing.JFrame {
             .addGap(0, 520, Short.MAX_VALUE)
         );
 
-        jPanel8.add(wedHyg);
+        appointmentsHyg.add(wedHyg);
 
         thuHyg.setBackground(new java.awt.Color(250, 250, 250));
         thuHyg.setPreferredSize(new java.awt.Dimension(100, 20));
@@ -274,7 +275,7 @@ public class Calendar extends javax.swing.JFrame {
             .addGap(0, 520, Short.MAX_VALUE)
         );
 
-        jPanel8.add(thuHyg);
+        appointmentsHyg.add(thuHyg);
 
         friHyg.setPreferredSize(new java.awt.Dimension(100, 20));
 
@@ -289,65 +290,65 @@ public class Calendar extends javax.swing.JFrame {
             .addGap(0, 520, Short.MAX_VALUE)
         );
 
-        jPanel8.add(friHyg);
+        appointmentsHyg.add(friHyg);
 
-        jSplitPane1.setRightComponent(jPanel8);
+        jSplitPane1.setRightComponent(appointmentsHyg);
 
         jScrollPane2.setViewportView(jSplitPane1);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout hygienistCalLayout = new javax.swing.GroupLayout(hygienistCal);
+        hygienistCal.setLayout(hygienistCalLayout);
+        hygienistCalLayout.setHorizontalGroup(
+            hygienistCalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(daysHyg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        hygienistCalLayout.setVerticalGroup(
+            hygienistCalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hygienistCalLayout.createSequentialGroup()
                 .addComponent(daysHyg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Hygienist", jPanel2);
+        allCalendars.addTab("Hygienist", hygienistCal);
 
-        jButton1.setText("New Appointment");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        newAppointment.setText("New Appointment");
+        newAppointment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                newAppointmentActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Patients");
+        Patients.setText("Patients");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jButton1)
+                .addComponent(newAppointment)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(Patients)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(allCalendars, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1)
+                .addComponent(allCalendars)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)))
+                    .addComponent(newAppointment)
+                    .addComponent(Patients)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void newAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newAppointmentActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_newAppointmentActionPerformed
 
     /**
      * @param args the command line arguments
@@ -386,23 +387,23 @@ public class Calendar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel DaysDent;
+    private javax.swing.JButton Patients;
+    private javax.swing.JTabbedPane allCalendars;
+    private javax.swing.JPanel appointmentsDen;
+    private javax.swing.JPanel appointmentsHyg;
     private javax.swing.JPanel daysDen;
     private javax.swing.JPanel daysHyg;
+    private javax.swing.JPanel dentistCal;
     private javax.swing.JPanel friDen;
     private javax.swing.JPanel friHyg;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel hygienistCal;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JSplitPane jSplitPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel monDen;
     private javax.swing.JPanel monHyg;
+    private javax.swing.JButton newAppointment;
     private javax.swing.JPanel thuDen;
     private javax.swing.JPanel thuHyg;
     private javax.swing.JPanel timesDen;
