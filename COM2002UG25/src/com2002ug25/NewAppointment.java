@@ -4,19 +4,22 @@
  * and open the template in the editor.
  */
 package com2002ug25;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
 import java.text.SimpleDateFormat;
 /**
  *
  * @author Peter
  */
-public class NewAppointment extends javax.swing.JDialog {
+public class NewAppointment extends javax.swing.JFrame {
 
     /**
      * Creates new form NewAppointment
      */
-    public NewAppointment(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public NewAppointment() {
         initComponents();
     }
 
@@ -76,19 +79,9 @@ public class NewAppointment extends javax.swing.JDialog {
                 patientRadioStateChanged(evt);
             }
         });
-        patientRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                patientRadioActionPerformed(evt);
-            }
-        });
 
         appointmentWith.add(timeOffRadio);
         timeOffRadio.setText("Time-off");
-        timeOffRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                timeOffRadioActionPerformed(evt);
-            }
-        });
 
         DOBDay.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31", "30", "29", "28", "27", "26", "25", "24", "23", "22", "21", "20", "19", "18", "17", "16", "15", "14", "13", "12", "11", "10", "09", "08", "07", "06", "05", "04", "03", "02", "01" }));
 
@@ -107,11 +100,6 @@ public class NewAppointment extends javax.swing.JDialog {
         durationLabel.setText("Duration");
 
         startTimeHour.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09", "10", "11", "12", "13", "14", "15", "16", "17" }));
-        startTimeHour.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                startTimeHourActionPerformed(evt);
-            }
-        });
 
         startTimeMinute.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "10", "20", "30", "40", "50" }));
 
@@ -122,6 +110,11 @@ public class NewAppointment extends javax.swing.JDialog {
         partner.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Dentist", "Hygienist" }));
 
         confirmButton.setText("Confirm");
+        confirmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmButtonActionPerformed(evt);
+            }
+        });
 
         cancelButton.setText("Cancel");
 
@@ -258,26 +251,87 @@ public class NewAppointment extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void patientRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientRadioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_patientRadioActionPerformed
-
-    private void timeOffRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeOffRadioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_timeOffRadioActionPerformed
-
-    private void startTimeHourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startTimeHourActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_startTimeHourActionPerformed
-
     private void patientRadioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_patientRadioStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_patientRadioStateChanged
 
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
+       
+       if (evt.getSource()==confirmButton)
+       {
+       if (patientRadio.isSelected()==true){
+           String whichpartner = partner.getSelectedItem().toString();
+           String name = patientName.getText();
+           String dayofb = DOBDay.getSelectedItem().toString();
+           String monthofb = DOBMonth.getSelectedItem().toString();
+           String yearofb = DOBYear.getSelectedItem().toString();
+           String DOB = yearofb+'-'+monthofb+'-'+dayofb;
+           String housenum = houseNumber.getText();
+           String pcode = postcode.getText();
+           String day = appointmentDay.getSelectedItem().toString();
+           String month = appointmentMonth.getSelectedItem().toString();
+           String year = appointmentYear.getSelectedItem().toString();
+           String date = year+'-'+month+'-'+day;
+           String starthour = startTimeHour.getSelectedItem().toString();      
+           String startminute = startTimeMinute.getSelectedItem().toString();
+           String startTime = starthour+':'+startminute;
+           String treatType = appointmentType.getSelectedItem().toString();
+           String durat= duration.getText();
+           System.out.println(whichpartner+'-'+name+'-'+DOB+'-'+housenum+'-'+pcode+'-'+date+'-'+startTime +'-'+treatType+'-'+ durat);
+       }
+       else if (timeOffRadio.isSelected()==true){
+           String whichpartner = partner.getSelectedItem().toString();
+           String name = "time off time off";
+           String day = appointmentDay.getSelectedItem().toString();
+           String month = appointmentMonth.getSelectedItem().toString();
+           String year = appointmentYear.getSelectedItem().toString();
+           String date = year+'-'+month+'-'+day;
+           String starthour = startTimeHour.getSelectedItem().toString();      
+           String startminute = startTimeMinute.getSelectedItem().toString();
+           String startTime = starthour+':'+startminute;
+           String treatType = appointmentType.getSelectedItem().toString();
+           String durat= duration.getText();
+           System.out.println(name +'-'+whichpartner+'-'+date+'-'+startTime +'-'+treatType+'-'+ durat);
+       }
+           /*
+             Connection con = null;
+            String DB="jdbc:mysql://stusql.dcs.shef.ac.uk/team025?user=team025&password=a2dc8801";
+
+            try { 
+            con = DriverManager.getConnection(DB);
+            System.out.println("connectsuccess");
+            }
+            catch (SQLException ex) {
+            ex.printStackTrace();
+            }
+            try {
+            stmt = (Statement) con.createStatement(); // create from open connection
+            int count = stmt.executeUpdate("INSERT INTO patients" + "(name, dob, contact, number, postcode, plan) VALUES ('" +name+"', '"+bday+"', '"+phoneno+ "', '"+housenum+"', '"+postcode+"', '"+plan+"')");  //('pls','1995-06-18','07889965789','86','S11 1NU', NULL)")
+
+            }
+            catch (SQLException ex) 
+            {
+            ex.printStackTrace();
+            }
+            finally 
+            {
+            if (stmt != null) try {
+                stmt.close();
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+            } 
+           */
+      java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+            }
+        });      
+    }//GEN-LAST:event_confirmButtonActionPerformed
+    }
     /**
      * @param args the command line arguments
      */
-    public static void main() {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -291,29 +345,18 @@ public class NewAppointment extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewAppointment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Patientreg.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewAppointment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Patientreg.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewAppointment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Patientreg.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewAppointment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Patientreg.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                NewAppointment dialog = new NewAppointment(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        dialog.setVisible(false);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
+        /* Create and display the form */
+  
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
