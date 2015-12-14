@@ -115,26 +115,18 @@ public static void reviewTreatments(String name, String number, String postcode,
  try {
  stmt = (Statement) con.createStatement(); // create from open connection
  String patientId = getPatientId(name,number,postcode,con);
- 
- //get number of outstanding treatments for patient
- ResultSet res1 = stmt.executeQuery("SELECT count(*) FROM outstanding_treatments WHERE patientId = '"+patientId+"'");
- while (res1.next()) {
- numberOfTreatments = res1.getInt(1);
- }
- 
+  
  //create a list of the names of the treatments
  ResultSet res2 = stmt.executeQuery("SELECT name FROM outstanding_treatments WHERE patientId = '"+patientId+"'");
  ArrayList <String> listOfTreatmentNames = new ArrayList();
  while (res2.next()) {
-     for (int i=1; i<(numberOfTreatments+1); i++)
-        listOfTreatmentNames.add(res2.getString(i));
+        listOfTreatmentNames.add(res2.getString(1));
  }
  
  //create a list of the costs of the treatments
  ArrayList <Integer> listOfTreatmentCosts = new ArrayList();
- for (int i = 0; i<numberOfTreatments; i++){
-     String tName = listOfTreatmentNames.get(i);
-     ResultSet res = stmt.executeQuery("SELECT cost FROM treatments WHERE name = '"+tName+"'");
+ for (String tName: listOfTreatmentNames){
+     ResultSet res = stmt.executeQuery("SELECT cost FROM treatment_list WHERE name = '"+tName+"'");
      while (res.next()) {
         listOfTreatmentCosts.add(res.getInt(1));
  }
@@ -158,9 +150,8 @@ public static void reviewTreatments(String name, String number, String postcode,
  
  //create list of the treatment types
  ArrayList <String> listOfTreatmentTypes = new ArrayList();
- for (int i = 0; i<numberOfTreatments; i++){
-     String tName = listOfTreatmentNames.get(i);
-     ResultSet res = stmt.executeQuery("SELECT type FROM treatments WHERE name = '"+tName+"'");
+ for (String tName: listOfTreatmentNames){
+     ResultSet res = stmt.executeQuery("SELECT type FROM treatment_list WHERE name = '"+tName+"'");
      while (res.next()) {
         listOfTreatmentTypes.add(res.getString(1));
  }
@@ -170,13 +161,12 @@ public static void reviewTreatments(String name, String number, String postcode,
  ArrayList <Integer> listOfTreatmentIds = new ArrayList();
  ResultSet res5 = stmt.executeQuery("SELECT treatmentId FROM outstanding_treatments WHERE patientId = '"+patientId+"'");
  while (res5.next()) {
-     for (int i=1; i<(numberOfTreatments+1); i++)
-        listOfTreatmentIds.add(res5.getInt(i));
+        listOfTreatmentIds.add(res5.getInt(1));
  }
   
  //create a full detailed list of the treatments (possible to do first then use get methods? I don't know how yet)
  ArrayList <Treatment> fullTreatmentList = new ArrayList();
- for (int i=0; i<numberOfTreatments; i++){
+ for (int i = 0; i<listOfTreatmentIds.size(); i++){
      int d = listOfTreatmentIds.get(i);
      String n = listOfTreatmentNames.get(i);
      String t = listOfTreatmentTypes.get(i);
@@ -193,16 +183,14 @@ public static void reviewTreatments(String name, String number, String postcode,
  }
  
  //create lists of treatments left to pay and treatments to remove from the database
- int numberOfFreeTreatments = checkupRem+hygieneRem+repairRem;
  ArrayList <Integer> listOfCostsOfTreatmentsToPay = new ArrayList();
  ArrayList <Integer> listOfTreatmentsToRemove = new ArrayList();
- for (int i=0; i<numberOfFreeTreatments; i++){
-     Treatment t = fullTreatmentList.get(i);
+ for (Treatment t: fullTreatmentList){
      String type = t.getType();
      int c = t.getCost();
      int d = t.getTreatmentId();
      switch (type) {
-            case "Checkup": if (checkupRem>0) {
+            case "Check-up": if (checkupRem>0) {
                 checkupRem--;
                 listOfTreatmentsToRemove.add(d);
             }else{
@@ -269,7 +257,7 @@ finally {
 }     
 }
 
-public static void addTreatment (String name, String houseno, String postcode, String treatmentName, Connection con){
+public static void addTreatment (String name, String houseno, String postcode, String treatmentName, Connection con) throws SQLException{
 Statement stmt = null;
 try {
  //get patientID
@@ -306,6 +294,7 @@ catch (SQLException ex) {
 finally {
  if (stmt != null) stmt.close();
 }
+System.out.println("Patient ID: "+patientId);
 return patientId;
 } 
 
@@ -317,18 +306,21 @@ public static void main(String[] args) throws SQLException {
 try { 
 con = DriverManager.getConnection(DB);
 System.out.println("connectsuccess");
-
+/*
      java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Patientreg().setVisible(true);
             }
         });
- 
-//registerAddress("16.6","Endcliffe Vale Road","Endcliffe","Sheffield","S10 3EW",con);
-registerPatient("Jonathan Gray","1993-05-21","07871632238","16.6","S10 3EW", con);
-subscribePatient("Jonathan Gray","16.6","S10 3EW","Oral Health", con);
-unsubscribePatient("Jonathan Gray","16.6","S10 3EW",con);
-
+*/
+//registerAddress("86","Brighton Terrace Road","Crookes","Sheffield","S10 1NU",con);
+//registerPatient("Jonathan Gray","1993-05-21","07871632238","86","S10 1NU", con);
+//subscribePatient("Jonathan Gray","86","S10 1NU","Dental Repair", con);
+//unsubscribePatient("Jonathan Gray","86","S10 1NU",con);
+//addTreatment("Jonathan Gray","86","S10 1NU","Check-up", con);
+//getPatientId("Jonathan Gray","86","S10 1NU", con);
+//reviewTreatments("Jonathan Gray","86","S10 1NU", con);
+//patientPaid("Jonathan Gray","86","S10 1NU", con);
 }
 catch (SQLException ex) {
  ex.printStackTrace();
