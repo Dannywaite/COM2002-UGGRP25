@@ -281,32 +281,25 @@ public Connection con;
            String startminute = startTimeMinute.getSelectedItem().toString();
            String startTime = starthour+':'+startminute;
            String treatType = appointmentType.getSelectedItem().toString();
-           String durat= duration.getText();
+           double durat= Double.parseDouble(duration.getText());
+           int duratMins = (int)(durat%60);
+           int duratHours = (int)((durat-duratMins)/60);
+           String correctDurat = Integer.toString(duratHours)+Integer.toString(duratMins)+"00";
            String patid = "";
-           System.out.println(whichpartner+'-'+name+'-'+DOB+'-'+housenum+'-'+pcode+'-'+date+'-'+startTime +'-'+treatType+'-'+ durat);
+           System.out.println(whichpartner+'-'+name+'-'+DOB+'-'+housenum+'-'+pcode+'-'+date+'-'+startTime +'-'+treatType+'-'+ correctDurat);
                        Connection con = null;
             String DB="jdbc:mysql://stusql.dcs.shef.ac.uk/team025?user=team025&password=a2dc8801";
 
             try { 
             con = DriverManager.getConnection(DB);
             System.out.println("connectsuccess");
-            }
-            catch (SQLException ex) {
-            ex.printStackTrace();
-            }
-           try {
-               patid = getPatientId(name,housenum,pcode,con);
-           } catch (SQLException ex) {
-               Logger.getLogger(NewAppointment.class.getName()).log(Level.SEVERE, null, ex);
-           }
-            try {
+            patid = getPatientId(name,housenum,pcode,con);           
             stmt = (Statement) con.createStatement(); // create from open connection
-            stmt.executeUpdate("INSERT INTO appointments" + "(patientID, date, partner, startTime, duration, name) VALUES ('" +patid+"', '"+date+"', '"+whichpartner+ "', '"+startTime+"', '"+durat+"', '"+treatType+"')");  //('pls','1995-06-18','07889965789','86','S11 1NU', NULL)")
-
+            stmt.executeUpdate("INSERT INTO appointments" + "(patientID, date, partner, startTime, duration, name) VALUES ('" +patid+"', '"+date+"', '"+whichpartner+ "', '"+startTime+"', '"+correctDurat+"', '"+treatType+"')");
             }
-            catch (SQLException ex) 
-            {
-            ex.printStackTrace();
+
+            catch (SQLException ex) {
+               Logger.getLogger(NewAppointment.class.getName()).log(Level.SEVERE, null, ex);
             }
             finally 
             {
@@ -319,7 +312,6 @@ public Connection con;
        }
        else if (timeOffRadio.isSelected()==true){
            String whichpartner = partner.getSelectedItem().toString();
-           String name = "time off time off";
            String day = appointmentDay.getSelectedItem().toString();
            String month = appointmentMonth.getSelectedItem().toString();
            String year = appointmentYear.getSelectedItem().toString();
@@ -327,9 +319,34 @@ public Connection con;
            String starthour = startTimeHour.getSelectedItem().toString();      
            String startminute = startTimeMinute.getSelectedItem().toString();
            String startTime = starthour+':'+startminute;
-           String treatType = appointmentType.getSelectedItem().toString();
-           String durat= duration.getText();
-           System.out.println(name +'-'+whichpartner+'-'+date+'-'+startTime +'-'+treatType+'-'+ durat);
+           double durat= Double.parseDouble(duration.getText());
+           int duratMins = (int)(durat%60);
+           int duratHours = (int)((durat-duratMins)/60);
+           String correctDurat = Integer.toString(duratHours)+Integer.toString(duratMins)+"00";
+           System.out.println("TIME OFF" +'-'+whichpartner+'-'+date+'-'+startTime +'-'+ correctDurat);
+           
+           Connection con = null;
+           String DB="jdbc:mysql://stusql.dcs.shef.ac.uk/team025?user=team025&password=a2dc8801";
+
+           try { 
+           con = DriverManager.getConnection(DB);
+           System.out.println("connectsuccess");
+           stmt = (Statement) con.createStatement(); // create from open connection
+           stmt.executeUpdate("INSERT INTO appointments" + "(patientID, date, partner, startTime, duration, name) VALUES (NULL, '"+date+"', '"+whichpartner+ "', '"+startTime+"', '"+correctDurat+"', NULL)"); 
+           
+           }
+           catch (SQLException ex) {
+           ex.printStackTrace();
+           }
+           finally 
+           {
+           if (stmt != null) try {
+               stmt.close();
+           } catch (SQLException ex) {
+               System.out.println(ex);
+           }
+           }
+           
        }
            
 
