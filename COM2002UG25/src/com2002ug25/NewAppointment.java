@@ -363,9 +363,11 @@ public Connection con;
       java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
             }
-        });      
+        });
+          this.dispose();
+       }
     }//GEN-LAST:event_confirmButtonActionPerformed
-    }
+    
     /**
      * @param args the command line arguments
      */

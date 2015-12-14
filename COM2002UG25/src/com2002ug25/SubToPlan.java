@@ -162,7 +162,8 @@ public class SubToPlan extends javax.swing.JFrame {
 }        
         
         
-        
+                  this.dispose();
+
     }// close if
     }//GEN-LAST:event_jButton1ActionPerformed
     

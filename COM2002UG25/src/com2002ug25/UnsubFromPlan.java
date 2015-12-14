@@ -140,7 +140,8 @@ public class UnsubFromPlan extends javax.swing.JFrame {
          } catch (SQLException ex) {
              Logger.getLogger(UnsubFromPlan.class.getName()).log(Level.SEVERE, null, ex);
          }
-        } 
+        }
+            this.dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
