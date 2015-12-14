@@ -249,7 +249,7 @@ public Connection con;
             }
         });
     
-           
+          this.dispose();
    
        }
     }//GEN-LAST:event_jButton1ActionPerformed
