@@ -4,18 +4,22 @@
  * and open the template in the editor.
  */
 package com2002ug25;
+import static com2002ug25.COM2002UG25.getPatientId;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Peter
  */
 public class NewAppointment extends javax.swing.JFrame {
-
+public Statement stmt;
+public Connection con;
     /**
      * Creates new form NewAppointment
      */
@@ -95,7 +99,7 @@ public class NewAppointment extends javax.swing.JFrame {
 
         startTimeLabel.setText("Start time");
 
-        typeLabel.setText("Type");
+        typeLabel.setText("Treatment");
 
         durationLabel.setText("Duration");
 
@@ -105,7 +109,7 @@ public class NewAppointment extends javax.swing.JFrame {
 
         timeSeparator.setText(":");
 
-        appointmentType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Treatment", "Checkup" }));
+        appointmentType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Amalgam", "Check-up", "Gold Crown", "Hygiene", "White Composite" }));
 
         partner.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Dentist", "Hygienist" }));
 
@@ -260,6 +264,7 @@ public class NewAppointment extends javax.swing.JFrame {
        if (evt.getSource()==confirmButton)
        {
        if (patientRadio.isSelected()==true){
+
            String whichpartner = partner.getSelectedItem().toString();
            String name = patientName.getText();
            String dayofb = DOBDay.getSelectedItem().toString();
@@ -277,7 +282,40 @@ public class NewAppointment extends javax.swing.JFrame {
            String startTime = starthour+':'+startminute;
            String treatType = appointmentType.getSelectedItem().toString();
            String durat= duration.getText();
+           String patid = "";
            System.out.println(whichpartner+'-'+name+'-'+DOB+'-'+housenum+'-'+pcode+'-'+date+'-'+startTime +'-'+treatType+'-'+ durat);
+                       Connection con = null;
+            String DB="jdbc:mysql://stusql.dcs.shef.ac.uk/team025?user=team025&password=a2dc8801";
+
+            try { 
+            con = DriverManager.getConnection(DB);
+            System.out.println("connectsuccess");
+            }
+            catch (SQLException ex) {
+            ex.printStackTrace();
+            }
+           try {
+               patid = getPatientId(name,housenum,pcode,con);
+           } catch (SQLException ex) {
+               Logger.getLogger(NewAppointment.class.getName()).log(Level.SEVERE, null, ex);
+           }
+            try {
+            stmt = (Statement) con.createStatement(); // create from open connection
+            stmt.executeUpdate("INSERT INTO appointments" + "(patientID, date, partner, startTime, duration, name) VALUES ('" +patid+"', '"+date+"', '"+whichpartner+ "', '"+startTime+"', '"+durat+"', '"+treatType+"')");  //('pls','1995-06-18','07889965789','86','S11 1NU', NULL)")
+
+            }
+            catch (SQLException ex) 
+            {
+            ex.printStackTrace();
+            }
+            finally 
+            {
+            if (stmt != null) try {
+                stmt.close();
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+            } 
        }
        else if (timeOffRadio.isSelected()==true){
            String whichpartner = partner.getSelectedItem().toString();
@@ -293,35 +331,9 @@ public class NewAppointment extends javax.swing.JFrame {
            String durat= duration.getText();
            System.out.println(name +'-'+whichpartner+'-'+date+'-'+startTime +'-'+treatType+'-'+ durat);
        }
-           /*
-             Connection con = null;
-            String DB="jdbc:mysql://stusql.dcs.shef.ac.uk/team025?user=team025&password=a2dc8801";
+           
 
-            try { 
-            con = DriverManager.getConnection(DB);
-            System.out.println("connectsuccess");
-            }
-            catch (SQLException ex) {
-            ex.printStackTrace();
-            }
-            try {
-            stmt = (Statement) con.createStatement(); // create from open connection
-            int count = stmt.executeUpdate("INSERT INTO patients" + "(name, dob, contact, number, postcode, plan) VALUES ('" +name+"', '"+bday+"', '"+phoneno+ "', '"+housenum+"', '"+postcode+"', '"+plan+"')");  //('pls','1995-06-18','07889965789','86','S11 1NU', NULL)")
-
-            }
-            catch (SQLException ex) 
-            {
-            ex.printStackTrace();
-            }
-            finally 
-            {
-            if (stmt != null) try {
-                stmt.close();
-            } catch (SQLException ex) {
-                System.out.println(ex);
-            }
-            } 
-           */
+           
        /*
        cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt){

@@ -306,13 +306,13 @@ public static void main(String[] args) throws SQLException {
 try { 
 con = DriverManager.getConnection(DB);
 System.out.println("connectsuccess");
-/*
+
      java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Patientreg().setVisible(true);
+                new Calendar().setVisible(true);
             }
         });
-*/
+
 //registerAddress("86","Brighton Terrace Road","Crookes","Sheffield","S10 1NU",con);
 //registerPatient("Jonathan Gray","1993-05-21","07871632238","86","S10 1NU", con);
 //subscribePatient("Jonathan Gray","86","S10 1NU","Dental Repair", con);
