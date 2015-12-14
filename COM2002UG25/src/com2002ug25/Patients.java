@@ -29,15 +29,34 @@ public class Patients extends javax.swing.JFrame {
 
         patients = new javax.swing.ButtonGroup();
         menu = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        patientList = new javax.swing.JPanel();
         regPatient = new javax.swing.JButton();
         treatments = new javax.swing.JButton();
         healthplan = new javax.swing.JButton();
-        patientList = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Patients");
+
+        jLabel1.setText("Patient Administration");
+
+        javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
+        menu.setLayout(menuLayout);
+        menuLayout.setHorizontalGroup(
+            menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuLayout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        menuLayout.setVerticalGroup(
+            menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuLayout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        patientList.setBackground(new java.awt.Color(255, 255, 255));
 
         regPatient.setText("Register New Patient");
         regPatient.addActionListener(new java.awt.event.ActionListener() {
@@ -53,63 +72,48 @@ public class Patients extends javax.swing.JFrame {
             }
         });
 
-        healthplan.setText("Healthplan");
+        healthplan.setText("Unsubscribe from plan");
+        healthplan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                healthplanActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
-        menu.setLayout(menuLayout);
-        menuLayout.setHorizontalGroup(
-            menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuLayout.createSequentialGroup()
-                .addComponent(regPatient)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(treatments)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(healthplan)
-                .addGap(0, 118, Short.MAX_VALUE))
-        );
-        menuLayout.setVerticalGroup(
-            menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(regPatient)
-                .addComponent(treatments)
-                .addComponent(healthplan))
-        );
-
-        patientList.setBackground(new java.awt.Color(255, 255, 255));
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
-
-        patients.add(jRadioButton1);
-        jRadioButton1.setText("Patient A");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jRadioButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jRadioButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jButton1.setText("Subscribe to plan");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout patientListLayout = new javax.swing.GroupLayout(patientList);
         patientList.setLayout(patientListLayout);
         patientListLayout.setHorizontalGroup(
             patientListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(patientListLayout.createSequentialGroup()
+                .addGroup(patientListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(patientListLayout.createSequentialGroup()
+                        .addComponent(regPatient)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(treatments))
+                    .addGroup(patientListLayout.createSequentialGroup()
+                        .addComponent(healthplan)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 86, Short.MAX_VALUE))
         );
         patientListLayout.setVerticalGroup(
             patientListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(patientListLayout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 256, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(patientListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(regPatient)
+                    .addComponent(treatments))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(patientListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(healthplan)
+                    .addComponent(jButton1))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -131,12 +135,32 @@ public class Patients extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void regPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regPatientActionPerformed
-        // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Patientreg().setVisible(true);
+            }
+        });
     }//GEN-LAST:event_regPatientActionPerformed
 
     private void treatmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_treatmentsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_treatmentsActionPerformed
+    //THIS IS SUBSCRIBE
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new SubToPlan().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jButton1ActionPerformed
+    //THIS IS UNSUBSCRIBE
+    private void healthplanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_healthplanActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new UnsubFromPlan().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_healthplanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,8 +206,8 @@ public class Patients extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton healthplan;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel patientList;
     private javax.swing.ButtonGroup patients;

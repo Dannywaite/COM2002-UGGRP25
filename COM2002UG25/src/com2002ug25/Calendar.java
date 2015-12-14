@@ -321,6 +321,11 @@ public class Calendar extends javax.swing.JFrame {
         });
 
         Patients.setText("Patients");
+        Patients.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PatientsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -347,8 +352,20 @@ public class Calendar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void newAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newAppointmentActionPerformed
-        // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new NewAppointment().setVisible(true);
+            }
+        });
     }//GEN-LAST:event_newAppointmentActionPerformed
+
+    private void PatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PatientsActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Patients().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_PatientsActionPerformed
 
     /**
      * @param args the command line arguments
