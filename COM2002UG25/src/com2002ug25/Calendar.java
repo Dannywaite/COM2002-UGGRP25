@@ -50,9 +50,6 @@ public class Calendar extends javax.swing.JFrame {
         wedHyg = new javax.swing.JPanel();
         thuHyg = new javax.swing.JPanel();
         friHyg = new javax.swing.JPanel();
-
-        
-                
         newAppointment = new javax.swing.JButton();
         Patients = new javax.swing.JButton();
 
@@ -315,33 +312,16 @@ public class Calendar extends javax.swing.JFrame {
         );
 
         allCalendars.addTab("Hygienist", hygienistCal);
-        
-        
 
         newAppointment.setText("New Appointment");
         newAppointment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-               java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new NewAppointment().setVisible(true);
+                newAppointmentActionPerformed(evt);
             }
         });
-            }
-        });
-        
-        
 
         Patients.setText("Patients");
-        Patients.addActionListener(new java.awt.event.ActionListener(){
-            public void actionPerformed(java.awt.event.ActionEvent evt){
-                  Patients newP = new Patients ();
-                  newP.main();
-            }
 
-        });
-        
-        
-        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(

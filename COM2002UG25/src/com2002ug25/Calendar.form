@@ -477,6 +477,9 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newAppointmentActionPerformed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="Calendar_newAppointment"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="Patients">
       <Properties>
