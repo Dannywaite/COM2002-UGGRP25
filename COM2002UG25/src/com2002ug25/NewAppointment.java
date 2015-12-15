@@ -63,7 +63,7 @@ public Connection con;
         duration = new javax.swing.JTextField();
         partner = new javax.swing.JComboBox<String>();
         confirmButton = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton("Cancel");
         appointmentDay = new javax.swing.JComboBox<String>();
         appointmentMonth = new javax.swing.JComboBox<String>();
         appointmentYear = new javax.swing.JComboBox<String>();
@@ -78,7 +78,12 @@ public Connection con;
         patientNameLabel.setText("Patient name");
 
         DOBLabel.setText("Date of Birth");
-
+        
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt){
+                    setVisible(false);
+            }
+        });
         appointmentWith.add(patientRadio);
         patientRadio.setText("With patient");
         patientRadio.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -355,15 +360,7 @@ public Connection con;
        }
 
            
-       /*
-       cancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt){
-                    setVisible(false);
-            }
-        });
-       CANCEL BUTTON
-       LOOKING FOR PLACE TO BE PLACED
-*/
+
       java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
             }
