@@ -10,9 +10,12 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Calendar;
 /**
  *
  * @author Peter
@@ -307,7 +310,9 @@ public Connection con;
 
             catch (SQLException ex) {
                Logger.getLogger(NewAppointment.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            } catch (ParseException ex) {
+               Logger.getLogger(NewAppointment.class.getName()).log(Level.SEVERE, null, ex);
+           }
             finally 
             {
             if (stmt != null) try {
@@ -335,6 +340,8 @@ public Connection con;
            }
            catch (SQLException ex) {
            ex.printStackTrace();
+           } catch (ParseException ex) {
+               Logger.getLogger(NewAppointment.class.getName()).log(Level.SEVERE, null, ex);
            }
            finally 
            {
@@ -398,12 +405,21 @@ public Connection con;
     }     
     }//GEN-LAST:event_cancelButtonActionPerformed
     
-public static Boolean clashCheck (String partner, String name, String housenum, String pcode, String date, String startHour, String startMin, String duration, Connection con) throws SQLException{
+public static Boolean clashCheck (String partner, String name, String housenum, String pcode, String date, String startHour, String startMin, String duration, Connection con) throws SQLException, ParseException{
 
 int appStartTime = Integer.parseInt(startHour+startMin)*100;
 int appEndTime = appStartTime + Integer.parseInt(duration);
+SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+Date simpleDate = sdfDate.parse(date);
+Calendar calendar = Calendar.getInstance();
+calendar.setTime(simpleDate);
+int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+System.out.println(dayOfWeek);
 if (appStartTime<90000 || appEndTime > 170000){
     System.out.println("APPOINTMENTS ONLY AVAILABLE BETWEEN 9:00 and 17:00");
+    return true;
+}else if(dayOfWeek==7 || dayOfWeek==1){   
+    System.out.println("APPOINTMENTS ONLY AVAILABLE ON WEEKDAYS");
     return true;
 }else{
 
