@@ -309,7 +309,7 @@ System.out.println("connectsuccess");
 
      java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Calendar().setVisible(true);
+                new Treatments().setVisible(true);
             }
         });
 
