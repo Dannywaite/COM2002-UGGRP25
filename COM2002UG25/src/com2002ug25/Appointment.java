@@ -46,10 +46,12 @@ public class Appointment {
         return patientId;
     }
 
+
     public int getDay() {
         return day;
     }
       
+
     public void setDate(String date) {
         this.date = date;
     }
@@ -76,3 +78,7 @@ public class Appointment {
          
     
 }
+
+      
+    
+
