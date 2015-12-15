@@ -2,12 +2,13 @@ package com2002ug25;
 
 import java.sql.Statement;
 import java.sql.Connection;
-import static java.sql.Date.valueOf;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.*;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  *
@@ -21,6 +22,8 @@ public class COM2002UG25 {
     private static int numberOfTreatments;
     private static String patientPlan;
     private static int modifiedTreatmentCost;
+    private static boolean listOfAppointments;
+    private static String patientName;
     public String name;
     public String bday;
     public String phoneno;
@@ -296,9 +299,57 @@ finally {
 }
 System.out.println("Patient ID: "+patientId);
 return patientId;
-} 
+}
 
-public static void main(String[] args) throws SQLException {
+public static void getPartnerAppointments (String partner, String startDay, String startMonth, String startYear, Connection con) throws SQLException, ParseException{
+ String monday = startYear+'-'+startMonth+'-'+startDay;
+ SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+ Date simpleDate = sdfDate.parse(monday);
+ Calendar calendar = Calendar.getInstance();
+ calendar.setTime(simpleDate);
+ int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+ if(dayOfWeek!=2){   
+    System.out.println("PLEASE SELECT A MONDAY");
+ }else{
+ calendar.add(Calendar.DATE, 4);
+ String friday = sdfDate.format(calendar.getTime());
+    
+ Statement stmt = null;
+ try {
+ stmt = (Statement) con.createStatement();
+ ResultSet res1 = stmt.executeQuery("SELECT date, startTime, duration, name, patientId FROM appointments WHERE partner = '"+partner+"' AND date between '"+monday+"' and  '"+friday+"' ORDER BY date asc, startTime asc");
+ ArrayList <Appointment> listOfAppointments = new ArrayList();
+ while (res1.next()) {
+    String d = (res1.getString(1));
+    String s = (res1.getString(2));
+    String r = (res1.getString(3));
+    String n = (res1.getString(4));
+    String p = (res1.getString(5));
+    listOfAppointments.add(new Appointment(d,s,r,n,p));
+    System.out.println(d+s+r+n+p);
+ }
+ for (Appointment a: listOfAppointments){
+     String patientId = a.getPatientId();
+     if (patientId==null){a.setPatientId("HOLIDAY");
+        }else{
+        ResultSet res2 = stmt.executeQuery("SELECT name FROM patients WHERE patientId = '"+patientId+"'");
+        while (res2.next()) {
+            String patientName = (res1.getString(1));
+            }
+        a.setPatientId(patientName);
+        System.out.println(patientName);
+ }
+ }
+}
+catch (SQLException ex) {
+ ex.printStackTrace();
+}
+finally {
+ if (stmt != null) stmt.close();
+}
+}
+}
+public static void main(String[] args) throws SQLException, ParseException {
     String DB="jdbc:mysql://stusql.dcs.shef.ac.uk/team025?user=team025&password=a2dc8801";
 
     Connection con = null; 
@@ -306,21 +357,22 @@ public static void main(String[] args) throws SQLException {
 try { 
 con = DriverManager.getConnection(DB);
 System.out.println("connectsuccess");
-
+/*
      java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Calendar().setVisible(true);
             }
         });
-
+*/
 //registerAddress("86","Brighton Terrace Road","Crookes","Sheffield","S10 1NU",con);
 //registerPatient("Jonathan Gray","1993-05-21","07871632238","86","S10 1NU", con);
 //subscribePatient("Jonathan Gray","86","S10 1NU","Dental Repair", con);
 //unsubscribePatient("Jonathan Gray","86","S10 1NU",con);
 //addTreatment("Jonathan Gray","86","S10 1NU","Check-up", con);
-//     getPatientId("Jonathan Gray","86","S10 1NU", con);
+//getPatientId("Jonathan Gray","86","S10 1NU", con);
 //reviewTreatments("Jonathan Gray","86","S10 1NU", con);
 //patientPaid("Jonathan Gray","86","S10 1NU", con);
+getPartnerAppointments("Dentist","21","12","2015",con);
 }
 catch (SQLException ex) {
  ex.printStackTrace();
