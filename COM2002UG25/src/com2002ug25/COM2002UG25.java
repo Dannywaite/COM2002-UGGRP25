@@ -29,6 +29,8 @@ public class COM2002UG25 {
     public String plan;
     public Connection con;
     
+ 
+    
 public static void registerPatient(String name, String bday, String phoneno, String housenum, String postcode, Connection con) throws SQLException{
  
  Statement stmt = null;  
@@ -309,7 +311,7 @@ System.out.println("connectsuccess");
 
      java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Calendar().setVisible(true);
+                new Menucal().setVisible(true);
             }
         });
 

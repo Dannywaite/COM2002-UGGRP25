@@ -4,16 +4,38 @@
  * and open the template in the editor.
  */
 package com2002ug25;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author fea13dw
  */
-public class Calendar extends javax.swing.JFrame {
+public class Menucal extends javax.swing.JFrame {
+    public String patientName;
+    private Date simpleDate;
+  
+    private String mon = "";
+    private String tues = "";
+    private String wed = "";
+    private String thurs = "";
+    private String fri = "";
 
     /**
      * Creates new form NewJFrame
      */
-    public Calendar() {
+    public Menucal() {
         initComponents();
     }
     /**
@@ -28,15 +50,35 @@ public class Calendar extends javax.swing.JFrame {
         allCalendars = new javax.swing.JTabbedPane();
         dentistCal = new javax.swing.JPanel();
         daysDen = new javax.swing.JPanel();
+        jComboBox1 = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jSplitPane2 = new javax.swing.JSplitPane();
         timesDen = new javax.swing.JPanel();
         appointmentsDen = new javax.swing.JPanel();
         monDen = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         tueDen = new javax.swing.JPanel();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        jTextArea4 = new javax.swing.JTextArea();
         wedDen = new javax.swing.JPanel();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        jTextArea5 = new javax.swing.JTextArea();
         thuDen = new javax.swing.JPanel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
         friDen = new javax.swing.JPanel();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         hygienistCal = new javax.swing.JPanel();
         daysHyg = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -56,15 +98,47 @@ public class Calendar extends javax.swing.JFrame {
 
         daysDen.setBackground(new java.awt.Color(255, 255, 255));
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Dentist", "Hygienist" }));
+
+        jLabel1.setText("Partner");
+
+        jLabel2.setText("Start of week date (yyyy-mm-dd)");
+
+        jButton1.setText("Get Appointments");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout daysDenLayout = new javax.swing.GroupLayout(daysDen);
         daysDen.setLayout(daysDenLayout);
         daysDenLayout.setHorizontalGroup(
             daysDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(daysDenLayout.createSequentialGroup()
+                .addGroup(daysDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(daysDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addGroup(daysDenLayout.createSequentialGroup()
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         daysDenLayout.setVerticalGroup(
             daysDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, daysDenLayout.createSequentialGroup()
+                .addGroup(daysDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(daysDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1)))
         );
 
         timesDen.setBackground(new java.awt.Color(255, 255, 255));
@@ -86,15 +160,21 @@ public class Calendar extends javax.swing.JFrame {
 
         monDen.setPreferredSize(new java.awt.Dimension(100, 20));
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane8.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout monDenLayout = new javax.swing.GroupLayout(monDen);
         monDen.setLayout(monDenLayout);
         monDenLayout.setHorizontalGroup(
             monDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 133, Short.MAX_VALUE)
+            .addGroup(monDenLayout.createSequentialGroup()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1, Short.MAX_VALUE))
         );
         monDenLayout.setVerticalGroup(
             monDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
+            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
         );
 
         appointmentsDen.add(monDen);
@@ -102,30 +182,42 @@ public class Calendar extends javax.swing.JFrame {
         tueDen.setBackground(new java.awt.Color(250, 250, 250));
         tueDen.setPreferredSize(new java.awt.Dimension(100, 20));
 
+        jTextArea4.setColumns(20);
+        jTextArea4.setRows(5);
+        jScrollPane11.setViewportView(jTextArea4);
+
         javax.swing.GroupLayout tueDenLayout = new javax.swing.GroupLayout(tueDen);
         tueDen.setLayout(tueDenLayout);
         tueDenLayout.setHorizontalGroup(
             tueDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 133, Short.MAX_VALUE)
+            .addGroup(tueDenLayout.createSequentialGroup()
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1, Short.MAX_VALUE))
         );
         tueDenLayout.setVerticalGroup(
             tueDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
+            .addComponent(jScrollPane11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
         );
 
         appointmentsDen.add(tueDen);
 
         wedDen.setPreferredSize(new java.awt.Dimension(100, 20));
 
+        jTextArea5.setColumns(20);
+        jTextArea5.setRows(5);
+        jScrollPane12.setViewportView(jTextArea5);
+
         javax.swing.GroupLayout wedDenLayout = new javax.swing.GroupLayout(wedDen);
         wedDen.setLayout(wedDenLayout);
         wedDenLayout.setHorizontalGroup(
             wedDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 133, Short.MAX_VALUE)
+            .addGroup(wedDenLayout.createSequentialGroup()
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         wedDenLayout.setVerticalGroup(
             wedDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
+            .addComponent(jScrollPane12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
         );
 
         appointmentsDen.add(wedDen);
@@ -133,30 +225,43 @@ public class Calendar extends javax.swing.JFrame {
         thuDen.setBackground(new java.awt.Color(250, 250, 250));
         thuDen.setPreferredSize(new java.awt.Dimension(100, 20));
 
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jScrollPane9.setViewportView(jTextArea2);
+
         javax.swing.GroupLayout thuDenLayout = new javax.swing.GroupLayout(thuDen);
         thuDen.setLayout(thuDenLayout);
         thuDenLayout.setHorizontalGroup(
             thuDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 133, Short.MAX_VALUE)
+            .addGroup(thuDenLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         thuDenLayout.setVerticalGroup(
             thuDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
+            .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
         );
 
         appointmentsDen.add(thuDen);
 
         friDen.setPreferredSize(new java.awt.Dimension(100, 20));
 
+        jTextArea3.setColumns(20);
+        jTextArea3.setRows(5);
+        jScrollPane10.setViewportView(jTextArea3);
+
         javax.swing.GroupLayout friDenLayout = new javax.swing.GroupLayout(friDen);
         friDen.setLayout(friDenLayout);
         friDenLayout.setHorizontalGroup(
             friDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 133, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, friDenLayout.createSequentialGroup()
+                .addGap(0, 1, Short.MAX_VALUE)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         friDenLayout.setVerticalGroup(
             friDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
+            .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
         );
 
         appointmentsDen.add(friDen);
@@ -165,19 +270,48 @@ public class Calendar extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jSplitPane2);
 
+        jLabel3.setText("Monday");
+
+        jLabel4.setText("Tuesday");
+
+        jLabel5.setText("Thursday");
+
+        jLabel6.setText("Wednesday");
+
+        jLabel7.setText("Friday");
+
         javax.swing.GroupLayout dentistCalLayout = new javax.swing.GroupLayout(dentistCal);
         dentistCal.setLayout(dentistCalLayout);
         dentistCalLayout.setHorizontalGroup(
             dentistCalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
             .addComponent(daysDen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(dentistCalLayout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addComponent(jLabel3)
+                .addGap(98, 98, 98)
+                .addComponent(jLabel4)
+                .addGap(89, 89, 89)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(84, 84, 84)
+                .addComponent(jLabel7)
+                .addGap(92, 92, 92))
         );
         dentistCalLayout.setVerticalGroup(
             dentistCalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dentistCalLayout.createSequentialGroup()
                 .addComponent(daysDen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addGroup(dentistCalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         allCalendars.addTab("Dentist", dentistCal);
@@ -309,7 +443,7 @@ public class Calendar extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE))
         );
 
-        allCalendars.addTab("Hygienist", hygienistCal);
+        allCalendars.addTab("", hygienistCal);
 
         newAppointment.setText("New Appointment");
         newAppointment.addActionListener(new java.awt.event.ActionListener() {
@@ -365,10 +499,102 @@ public class Calendar extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_PatientsActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {                                         
+            String DB="jdbc:mysql://stusql.dcs.shef.ac.uk/team025?user=team025&password=a2dc8801";
+            
+            Connection con = null;
+            try {
+                con = DriverManager.getConnection(DB);
+                System.out.println("connectsuccess");
+            }
+            catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            String partner = jComboBox1.getSelectedItem().toString();
+            String monday = jTextField1.getText();
+            SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+            Date simpleDate = sdfDate.parse(monday);
+            
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(simpleDate);
+            int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+            if(dayOfWeek!=2){
+                System.out.println("PLEASE SELECT A MONDAY");
+            }else{
+                calendar.add(Calendar.DATE, 4);
+                String friday = sdfDate.format(calendar.getTime());
+                
+                Statement stmt = null;
+                try {
+                    stmt = (Statement) con.createStatement();
+                    ResultSet res1 = stmt.executeQuery("SELECT date, startTime, duration, name, patientId FROM appointments WHERE partner = '"+partner+"' AND date between '"+monday+"' and  '"+friday+"' ORDER BY date asc, startTime asc");
+                    ArrayList <Appointment> listOfAppointments = new ArrayList();
+                    while (res1.next()) {
+                        String d = (res1.getString(1));
+                        String s = (res1.getString(2));
+                        String r = (res1.getString(3));
+                        String n = (res1.getString(4));
+                        String p = (res1.getString(5));
+                        simpleDate = sdfDate.parse(d);
+                        calendar.setTime(simpleDate);
+                        int day = calendar.get(Calendar.DAY_OF_WEEK);
+                        listOfAppointments.add(new Appointment(d,s,r,n,p,day));
+                    }
+                   for (Appointment a: listOfAppointments){
+                                      
+                        String patientId = a.getPatientId();
+                        if (patientId==null){a.setPatientId("HOLIDAY");
+                        }else{
+                            stmt = (Statement) con.createStatement();
+                            ResultSet res2 = stmt.executeQuery("SELECT name FROM patients WHERE patientId = '"+patientId+"'");
+                            while (res2.next()) {
+                                patientName = (res2.getString(1));
+                                System.out.println(patientName);
+                            }
+                     
+                        }
+                       String stime = a.getStartTime();
+                       String durat = a.getDuration();
+                       String treat = a.getTreatment();
+                       if (2 == a.getDay()){
+                          mon = mon  + "Start time: "+ stime+"\nDuration: " + durat + "\nTreatment: " + treat + "\nPatient: " + patientName +"\n \n";
+                       }
+                       else if (3 == a.getDay()) {
+                           tues = tues  + "Start time: "+ stime+"\nDuration: " + durat + "\nTreatment: " + treat + "\nPatient: " + patientName+"\n \n";
+                       }
+                       else if (4 == a.getDay()) {
+                           wed = wed  + "Start time: "+ stime+"\nDuration: " + durat + "\nTreatment: " + treat + "\nPatient: " + patientName+"\n \n";
+                       }                            
+                       else if (5 == a.getDay()) {
+                           thurs = thurs  + "Start time: "+ stime+"\nDuration: " + durat + "\nTreatment: " + treat + "\nPatient: " + patientName+"\n \n";
+                       }
+                       else if (6 == a.getDay()) {
+                           fri = fri  + "Start time: "+ stime+"\nDuration: " + durat + "\nTreatment: " + treat + "\nPatient: " + patientName+"\n \n";
+                       }
+                       
+                    }                
+                     jTextArea1.setText(mon);
+                     jTextArea4.setText(tues);
+                     jTextArea5.setText(wed);
+                     jTextArea2.setText(thurs);
+                     jTextArea3.setText(fri);
 
+                    
+                }  catch (SQLException ex) {
+                    Logger.getLogger(Menucal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        catch (ParseException ex) {
+            Logger.getLogger(Menucal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+         
+    /**
+     * @param args the command line arguments
+     */
     /**
      * @param args the command line arguments
      */
@@ -386,21 +612,23 @@ public class Calendar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Calendar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Menucal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Calendar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Menucal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Calendar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Menucal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Calendar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Menucal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Calendar().setVisible(true);
+                new Menucal().setVisible(true);
             }
         });
     }
@@ -416,10 +644,30 @@ public class Calendar extends javax.swing.JFrame {
     private javax.swing.JPanel friDen;
     private javax.swing.JPanel friHyg;
     private javax.swing.JPanel hygienistCal;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JSplitPane jSplitPane2;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextArea3;
+    private javax.swing.JTextArea jTextArea4;
+    private javax.swing.JTextArea jTextArea5;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel monDen;
     private javax.swing.JPanel monHyg;
     private javax.swing.JButton newAppointment;
@@ -432,5 +680,9 @@ public class Calendar extends javax.swing.JFrame {
     private javax.swing.JPanel wedDen;
     private javax.swing.JPanel wedHyg;
     // End of variables declaration//GEN-END:variables
+
+    void setTime(Date simpleDate) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
