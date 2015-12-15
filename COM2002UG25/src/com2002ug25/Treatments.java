@@ -5,17 +5,27 @@
  */
 package com2002ug25;
 
+import static com2002ug25.COM2002UG25.getPatientId;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author aca12pim
  */
-public class Treatments extends javax.swing.JDialog {
-
+public class Treatments extends javax.swing.JFrame {
+public Statement stmt;
+public Connection con;
     /**
      * Creates new form Treatments
      */
-    public Treatments(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public Treatments() {
         initComponents();
     }
 
@@ -29,50 +39,44 @@ public class Treatments extends javax.swing.JDialog {
     private void initComponents() {
 
         treatmentList = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         menu = new javax.swing.JPanel();
         addTreatment = new javax.swing.JButton();
         removeTreatment = new javax.swing.JButton();
         totalCost = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Treatments");
 
         treatmentList.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
-
-        jCheckBox1.setText("Treatment A - Date - Cost - Covered by Plan?");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jCheckBox1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout treatmentListLayout = new javax.swing.GroupLayout(treatmentList);
         treatmentList.setLayout(treatmentListLayout);
         treatmentListLayout.setHorizontalGroup(
             treatmentListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(treatmentListLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         treatmentListLayout.setVerticalGroup(
             treatmentListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(treatmentListLayout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 171, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         addTreatment.setText("Add Treatment");
@@ -86,15 +90,65 @@ public class Treatments extends javax.swing.JDialog {
 
         totalCost.setBackground(new java.awt.Color(255, 255, 255));
 
+        jTextField1.setText(" ");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jTextField2.setText(" ");
+
+        jTextField3.setToolTipText("");
+
+        jLabel1.setText("Name");
+
+        jLabel2.setText("House Num");
+
+        jLabel3.setText("Post Code");
+
+        jButton1.setText("Get patients treatment list");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout totalCostLayout = new javax.swing.GroupLayout(totalCost);
         totalCost.setLayout(totalCostLayout);
         totalCostLayout.setHorizontalGroup(
             totalCostLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(totalCostLayout.createSequentialGroup()
+                .addGroup(totalCostLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(totalCostLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(totalCostLayout.createSequentialGroup()
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(totalCostLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3)))
+                .addGap(32, 32, 32)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         totalCostLayout.setVerticalGroup(
             totalCostLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 36, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, totalCostLayout.createSequentialGroup()
+                .addGroup(totalCostLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(totalCostLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1)))
         );
 
         javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
@@ -105,7 +159,7 @@ public class Treatments extends javax.swing.JDialog {
                 .addComponent(addTreatment)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(removeTreatment)
-                .addGap(0, 160, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(totalCost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         menuLayout.setVerticalGroup(
@@ -140,6 +194,64 @@ public class Treatments extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_addTreatmentActionPerformed
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        String DB="jdbc:mysql://stusql.dcs.shef.ac.uk/team025?user=team025&password=a2dc8801";
+
+        Connection con = null; 
+        try { 
+        con = DriverManager.getConnection(DB);
+        System.out.println("connectsuccess");
+        }
+        catch (SQLException ex) {
+        ex.printStackTrace();
+        }        
+            
+        String name = jTextField1.getText();
+        String hnum = jTextField2.getText();
+        String pcode = jTextField1.getText();
+     
+        Statement stmt = null; 
+        try {
+        stmt = (Statement) con.createStatement(); // create from open connection
+        String patientId = getPatientId(name,hnum,pcode,con);
+
+        ResultSet res2 = stmt.executeQuery("SELECT name FROM outstanding_treatments WHERE patientId = '"+patientId+"'");
+        ArrayList <String> listOfTreatmentNames = new ArrayList();
+        while (res2.next()) {
+            listOfTreatmentNames.add(res2.getString(1));
+        }
+
+     //create a list of the costs of the treatments
+     ArrayList <Integer> listOfTreatmentCosts = new ArrayList();
+     for (String tName: listOfTreatmentNames){
+         ResultSet res = stmt.executeQuery("SELECT cost FROM treatment_list WHERE name = '"+tName+"'");
+         while (res.next()) {
+            listOfTreatmentCosts.add(res.getInt(1));
+     }
+     }
+
+     int totalTreatmentCost = listOfTreatmentCosts.stream().mapToInt(Integer::intValue).sum();
+System.out.println("Treatments: "+listOfTreatmentNames);
+     //    jTextArea1.setText
+  //   System.out.println ("Costs: "+listOfTreatmentCosts);
+  //  System.out.println ("Total: "+totalTreatmentCost);
+
+
+
+    } catch (SQLException ex) {
+        Logger.getLogger(Treatments.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+            }
+        });
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -167,25 +279,19 @@ public class Treatments extends javax.swing.JDialog {
         }
         //</editor-fold>
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                Treatments dialog = new Treatments(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addTreatment;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     private javax.swing.JPanel menu;
     private javax.swing.JButton removeTreatment;
     private javax.swing.JPanel totalCost;
