@@ -7,8 +7,10 @@ package com2002ug25;
 import static com2002ug25.COM2002UG25.getPatientId;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.util.*;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -261,41 +263,43 @@ public Connection con;
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
        
-       if (evt.getSource()==confirmButton)
+    if (evt.getSource()==confirmButton)
        {
+       String whichpartner = partner.getSelectedItem().toString();
+       String name = patientName.getText();
+       String dayofb = DOBDay.getSelectedItem().toString();
+       String monthofb = DOBMonth.getSelectedItem().toString();
+       String yearofb = DOBYear.getSelectedItem().toString();
+       String DOB = yearofb+'-'+monthofb+'-'+dayofb;
+       String housenum = houseNumber.getText();
+       String pcode = postcode.getText();
+       String day = appointmentDay.getSelectedItem().toString();
+       String month = appointmentMonth.getSelectedItem().toString();
+       String year = appointmentYear.getSelectedItem().toString();
+       String date = year+'-'+month+'-'+day;
+       String startHour = startTimeHour.getSelectedItem().toString();      
+       String startMinute = startTimeMinute.getSelectedItem().toString();
+       String startTime = startHour+':'+startMinute;
+       String treatType = appointmentType.getSelectedItem().toString();
+       double durat= Double.parseDouble(duration.getText());
+       int duratMins = (int)(durat%60);
+       int duratHours = (int)((durat-duratMins)/60);
+       String correctDurat = Integer.toString(duratHours)+Integer.toString(duratMins)+"00";
+                      
        if (patientRadio.isSelected()==true){
-
-           String whichpartner = partner.getSelectedItem().toString();
-           String name = patientName.getText();
-           String dayofb = DOBDay.getSelectedItem().toString();
-           String monthofb = DOBMonth.getSelectedItem().toString();
-           String yearofb = DOBYear.getSelectedItem().toString();
-           String DOB = yearofb+'-'+monthofb+'-'+dayofb;
-           String housenum = houseNumber.getText();
-           String pcode = postcode.getText();
-           String day = appointmentDay.getSelectedItem().toString();
-           String month = appointmentMonth.getSelectedItem().toString();
-           String year = appointmentYear.getSelectedItem().toString();
-           String date = year+'-'+month+'-'+day;
-           String starthour = startTimeHour.getSelectedItem().toString();      
-           String startminute = startTimeMinute.getSelectedItem().toString();
-           String startTime = starthour+':'+startminute;
-           String treatType = appointmentType.getSelectedItem().toString();
-           double durat= Double.parseDouble(duration.getText());
-           int duratMins = (int)(durat%60);
-           int duratHours = (int)((durat-duratMins)/60);
-           String correctDurat = Integer.toString(duratHours)+Integer.toString(duratMins)+"00";
-           String patid = "";
            System.out.println(whichpartner+'-'+name+'-'+DOB+'-'+housenum+'-'+pcode+'-'+date+'-'+startTime +'-'+treatType+'-'+ correctDurat);
-                       Connection con = null;
-            String DB="jdbc:mysql://stusql.dcs.shef.ac.uk/team025?user=team025&password=a2dc8801";
-
+            
+            
+            Connection con = null;
             try { 
+            String DB="jdbc:mysql://stusql.dcs.shef.ac.uk/team025?user=team025&password=a2dc8801";
             con = DriverManager.getConnection(DB);
             System.out.println("connectsuccess");
-            patid = getPatientId(name,housenum,pcode,con);           
+            if(clashCheck(whichpartner, name, housenum, pcode, date, startHour, startMinute, correctDurat, con)==true){}else{
+            String patid = getPatientId(name,housenum,pcode,con);           
             stmt = (Statement) con.createStatement(); // create from open connection
             stmt.executeUpdate("INSERT INTO appointments" + "(patientID, date, partner, startTime, duration, name) VALUES ('" +patid+"', '"+date+"', '"+whichpartner+ "', '"+startTime+"', '"+correctDurat+"', '"+treatType+"')");
+            }
             }
 
             catch (SQLException ex) {
@@ -311,29 +315,20 @@ public Connection con;
             } 
        }
        else if (timeOffRadio.isSelected()==true){
-           String whichpartner = partner.getSelectedItem().toString();
-           String day = appointmentDay.getSelectedItem().toString();
-           String month = appointmentMonth.getSelectedItem().toString();
-           String year = appointmentYear.getSelectedItem().toString();
-           String date = year+'-'+month+'-'+day;
-           String starthour = startTimeHour.getSelectedItem().toString();      
-           String startminute = startTimeMinute.getSelectedItem().toString();
-           String startTime = starthour+':'+startminute;
-           double durat= Double.parseDouble(duration.getText());
-           int duratMins = (int)(durat%60);
-           int duratHours = (int)((durat-duratMins)/60);
-           String correctDurat = Integer.toString(duratHours)+Integer.toString(duratMins)+"00";
+     
            System.out.println("TIME OFF" +'-'+whichpartner+'-'+date+'-'+startTime +'-'+ correctDurat);
            
            Connection con = null;
            String DB="jdbc:mysql://stusql.dcs.shef.ac.uk/team025?user=team025&password=a2dc8801";
 
-           try { 
+           try {               
            con = DriverManager.getConnection(DB);
            System.out.println("connectsuccess");
+           if(clashCheck(whichpartner, null, null, null, date, startHour, startMinute, correctDurat, con)==true){}else{
            stmt = (Statement) con.createStatement(); // create from open connection
            stmt.executeUpdate("INSERT INTO appointments" + "(patientID, date, partner, startTime, duration, name) VALUES (NULL, '"+date+"', '"+whichpartner+ "', '"+startTime+"', '"+correctDurat+"', NULL)"); 
            
+           }
            }
            catch (SQLException ex) {
            ex.printStackTrace();
@@ -348,6 +343,10 @@ public Connection con;
            }
            
        }
+
+ 
+  
+
            
 
            
@@ -367,6 +366,80 @@ public Connection con;
           this.dispose();
        }
     }//GEN-LAST:event_confirmButtonActionPerformed
+    
+public static Boolean clashCheck (String partner, String name, String housenum, String pcode, String date, String startHour, String startMin, String duration, Connection con) throws SQLException{
+
+int appStartTime = Integer.parseInt(startHour+startMin)*100;
+int appEndTime = appStartTime + Integer.parseInt(duration);
+if (appStartTime<90000 || appEndTime > 170000){
+    System.out.println("APPOINTMENTS ONLY AVAILABLE BETWEEN 9:00 and 17:00");
+    return true;
+}else{
+
+//if an appointment for a patient
+if (name!=null){   
+    Statement stmt = null;
+    try {
+     stmt = (Statement) con.createStatement();
+     String patid = getPatientId(name,housenum,pcode,con);
+
+     ResultSet res1 = stmt.executeQuery("SELECT startTime, duration FROM appointments WHERE date = '"+date+"' AND (patientId = '"+patid+"' OR partner = '"+partner+"')");
+     ArrayList<String> startTimes = new ArrayList();
+     ArrayList<String> durations = new ArrayList();
+     while (res1.next()) {
+     startTimes.add(res1.getString(1).replaceAll(":", ""));
+     durations.add(res1.getString(2).replaceAll(":", ""));
+     }
+     
+     for (int i = 0; i<startTimes.size(); i++){
+         double bookedStartTime = Double.parseDouble(startTimes.get(i));
+         double bookedEndTime=bookedStartTime+Double.parseDouble(durations.get(i));       
+         if (appStartTime<bookedEndTime && appEndTime>bookedStartTime){
+             System.out.println("CLASH! with appointment at: "+startTimes.get(i));
+             return true;
+         }
+     }
+    }
+    catch (SQLException ex) {
+     ex.printStackTrace();
+    }
+    finally {
+     if (stmt != null) stmt.close();
+    }
+
+//if booking time off
+}else{
+    Statement stmt = null;
+    try {
+     stmt = (Statement) con.createStatement();
+     ResultSet res1 = stmt.executeQuery("SELECT startTime, duration FROM appointments WHERE date = '"+date+"' AND partner = '"+partner+"'");
+     ArrayList<String> startTimes = new ArrayList();
+     ArrayList<String> durations = new ArrayList();
+     while (res1.next()) {
+     startTimes.add(res1.getString(1).replaceAll(":", ""));
+     durations.add(res1.getString(2).replaceAll(":", ""));
+     }
+     
+     for (int i = 0; i<startTimes.size(); i++){
+         double bookedStartTime = Double.parseDouble(startTimes.get(i));
+         double bookedEndTime=bookedStartTime+Double.parseDouble(durations.get(i));   
+         if (appStartTime<bookedEndTime && appEndTime>bookedStartTime){
+             System.out.println("CLASH! with appointment at: "+startTimes.get(i));
+             return true;
+         }
+     }
+    }
+    catch (SQLException ex) {
+     ex.printStackTrace();
+    }
+    finally {
+     if (stmt != null) stmt.close();
+    }    
+}
+System.out.println("NO CLASH");
+}
+return false;
+} 
     
     /**
      * @param args the command line arguments
