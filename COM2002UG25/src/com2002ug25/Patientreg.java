@@ -55,7 +55,7 @@ public Connection con;
         jTextField8 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Patient Registration");
         setBackground(new java.awt.Color(200, 200, 200));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
