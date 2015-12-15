@@ -10,9 +10,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Time;
 import java.util.*;
-import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -123,6 +121,11 @@ public Connection con;
         });
 
         cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         appointmentDay.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31", "30", "29", "28", "27", "26", "25", "24", "23", "22", "21", "20", "19", "18", "17", "16", "15", "14", "13", "12", "11", "10", "09", "08", "07", "06", "05", "04", "03", "02", "01" }));
 
@@ -344,11 +347,6 @@ public Connection con;
            
        }
 
- 
-  
-
-           
-
            
        /*
        cancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -366,6 +364,39 @@ public Connection con;
           this.dispose();
        }
     }//GEN-LAST:event_confirmButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+    String name = patientName.getText();
+    String day = appointmentDay.getSelectedItem().toString();
+    String month = appointmentMonth.getSelectedItem().toString();
+    String year = appointmentYear.getSelectedItem().toString();
+    String date = year+'-'+month+'-'+day;
+    String number = houseNumber.getText();
+    String pcode = postcode.getText();
+    Statement stmt = null;
+    Connection con = null;
+    
+    try {
+     //get patientID
+     String DB="jdbc:mysql://stusql.dcs.shef.ac.uk/team025?user=team025&password=a2dc8801";
+     con = DriverManager.getConnection(DB);
+     String patientId = getPatientId(name,number,pcode,con);
+     //delete all outstanding treatments for the patient
+     stmt = (Statement) con.createStatement();
+     stmt.executeUpdate("DELETE FROM appointments WHERE patientId = '"+patientId+"' AND date = '"+date+"'");
+     System.out.println("All appointments on "+date+" cancelled for "+name);
+    }
+    catch (SQLException ex) {
+     ex.printStackTrace();
+    }
+    finally {
+     if (stmt != null) try {
+         stmt.close();
+     } catch (SQLException ex) {
+         Logger.getLogger(NewAppointment.class.getName()).log(Level.SEVERE, null, ex);
+     }
+    }     
+    }//GEN-LAST:event_cancelButtonActionPerformed
     
 public static Boolean clashCheck (String partner, String name, String housenum, String pcode, String date, String startHour, String startMin, String duration, Connection con) throws SQLException{
 
