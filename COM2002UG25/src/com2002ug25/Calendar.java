@@ -59,25 +59,15 @@ public class Calendar extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         appointmentsDen = new javax.swing.JPanel();
         monDen = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox();
-        jComboBox2 = new javax.swing.JComboBox();
-        jComboBox3 = new javax.swing.JComboBox();
+        
         tueDen = new javax.swing.JPanel();
-        jComboBox4 = new javax.swing.JComboBox();
-        jComboBox5 = new javax.swing.JComboBox();
-        jComboBox6 = new javax.swing.JComboBox();
+        
         wedDen = new javax.swing.JPanel();
-        jComboBox7 = new javax.swing.JComboBox();
-        jComboBox8 = new javax.swing.JComboBox();
-        jComboBox9 = new javax.swing.JComboBox();
+        
         thuDen = new javax.swing.JPanel();
-        jComboBox10 = new javax.swing.JComboBox();
-        jComboBox11 = new javax.swing.JComboBox();
-        jComboBox12 = new javax.swing.JComboBox();
+        
         friDen = new javax.swing.JPanel();
-        jComboBox13 = new javax.swing.JComboBox();
-        jComboBox14 = new javax.swing.JComboBox();
-        jComboBox15 = new javax.swing.JComboBox();
+        
         hygienistCal = new javax.swing.JPanel();
         daysHyg = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -109,25 +99,15 @@ public class Calendar extends javax.swing.JFrame {
         jLabel48 = new javax.swing.JLabel();
         appointmentsHyg = new javax.swing.JPanel();
         monHyg = new javax.swing.JPanel();
-        jComboBox16 = new javax.swing.JComboBox();
-        jComboBox17 = new javax.swing.JComboBox();
-        jComboBox18 = new javax.swing.JComboBox();
+       
         tueHyg = new javax.swing.JPanel();
-        jComboBox19 = new javax.swing.JComboBox();
-        jComboBox20 = new javax.swing.JComboBox();
-        jComboBox21 = new javax.swing.JComboBox();
+        
         wedHyg = new javax.swing.JPanel();
-        jComboBox22 = new javax.swing.JComboBox();
-        jComboBox23 = new javax.swing.JComboBox();
-        jComboBox24 = new javax.swing.JComboBox();
+        
         thuHyg = new javax.swing.JPanel();
-        jComboBox25 = new javax.swing.JComboBox();
-        jComboBox26 = new javax.swing.JComboBox();
-        jComboBox27 = new javax.swing.JComboBox();
+       
         friHyg = new javax.swing.JPanel();
-        jComboBox28 = new javax.swing.JComboBox();
-        jComboBox29 = new javax.swing.JComboBox();
-        jComboBox30 = new javax.swing.JComboBox();
+        
         newAppointment = new javax.swing.JButton();
         Patients = new javax.swing.JButton();
 
@@ -285,95 +265,55 @@ public class Calendar extends javax.swing.JFrame {
 
         monDen.setPreferredSize(new java.awt.Dimension(100, 20));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31" }));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Jan", "Feb", "Mar", "Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec" }));
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015"}));
+        
 
         javax.swing.GroupLayout monDenLayout = new javax.swing.GroupLayout(monDen);
         monDen.setLayout(monDenLayout);
         monDenLayout.setHorizontalGroup(
             monDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(monDenLayout.createSequentialGroup()
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+            .addGap(36, 36, 36))
         );
         monDenLayout.setVerticalGroup(
             monDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, monDenLayout.createSequentialGroup()
                 .addGap(0, 759, Short.MAX_VALUE)
                 .addGroup(monDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
+        )));
 
         appointmentsDen.add(monDen);
 
         tueDen.setBackground(new java.awt.Color(250, 250, 250));
         tueDen.setPreferredSize(new java.awt.Dimension(100, 20));
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31" }));
-
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Jan", "Feb", "Mar", "Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec" }));
-
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015"}));
-
         javax.swing.GroupLayout tueDenLayout = new javax.swing.GroupLayout(tueDen);
         tueDen.setLayout(tueDenLayout);
         tueDenLayout.setHorizontalGroup(
             tueDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tueDenLayout.createSequentialGroup()
-                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         tueDenLayout.setVerticalGroup(
             tueDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tueDenLayout.createSequentialGroup()
-                .addGap(0, 759, Short.MAX_VALUE)
-                .addGroup(tueDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tueDenLayout.createSequentialGroup())
         );
 
         appointmentsDen.add(tueDen);
 
         wedDen.setPreferredSize(new java.awt.Dimension(100, 20));
 
-        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31" }));
-
-        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Jan", "Feb", "Mar", "Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec" }));
-
-        jComboBox9.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015"}));
-
         javax.swing.GroupLayout wedDenLayout = new javax.swing.GroupLayout(wedDen);
         wedDen.setLayout(wedDenLayout);
         wedDenLayout.setHorizontalGroup(
             wedDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(wedDenLayout.createSequentialGroup()
-                .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         wedDenLayout.setVerticalGroup(
             wedDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, wedDenLayout.createSequentialGroup()
                 .addGap(0, 759, Short.MAX_VALUE)
-                .addGroup(wedDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                )
         );
 
         appointmentsDen.add(wedDen);
@@ -381,22 +321,12 @@ public class Calendar extends javax.swing.JFrame {
         thuDen.setBackground(new java.awt.Color(250, 250, 250));
         thuDen.setPreferredSize(new java.awt.Dimension(100, 20));
 
-        jComboBox10.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31" }));
-
-        jComboBox11.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Jan", "Feb", "Mar", "Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec" }));
-
-        jComboBox12.setModel(new javax.swing.DefaultComboBoxModel(new String[]  { "2015"}));
 
         javax.swing.GroupLayout thuDenLayout = new javax.swing.GroupLayout(thuDen);
         thuDen.setLayout(thuDenLayout);
         thuDenLayout.setHorizontalGroup(
             thuDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(thuDenLayout.createSequentialGroup()
-                .addComponent(jComboBox10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         thuDenLayout.setVerticalGroup(
@@ -404,41 +334,22 @@ public class Calendar extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, thuDenLayout.createSequentialGroup()
                 .addGap(0, 759, Short.MAX_VALUE)
                 .addGroup(thuDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    ))
         );
 
         appointmentsDen.add(thuDen);
 
         friDen.setPreferredSize(new java.awt.Dimension(100, 20));
 
-        jComboBox13.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31" }));
-
-        jComboBox14.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Jan", "Feb", "Mar", "Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec" }));
-
-        jComboBox15.setModel(new javax.swing.DefaultComboBoxModel(new String[]  { "2015"}));
-
         javax.swing.GroupLayout friDenLayout = new javax.swing.GroupLayout(friDen);
         friDen.setLayout(friDenLayout);
         friDenLayout.setHorizontalGroup(
             friDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(friDenLayout.createSequentialGroup()
-                .addComponent(jComboBox13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         friDenLayout.setVerticalGroup(
             friDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, friDenLayout.createSequentialGroup()
-                .addGap(0, 759, Short.MAX_VALUE)
-                .addGroup(friDenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 759, Short.MAX_VALUE))
         );
 
         appointmentsDen.add(friDen);
@@ -613,109 +524,65 @@ public class Calendar extends javax.swing.JFrame {
         appointmentsHyg.setLayout(new java.awt.GridLayout(1, 0));
 
         monHyg.setPreferredSize(new java.awt.Dimension(100, 20));
-
-        jComboBox16.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31" }));
-        jComboBox17.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Jan", "Feb", "Mar", "Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec" }));
-        jComboBox18.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015"}));
         
         javax.swing.GroupLayout monHygLayout = new javax.swing.GroupLayout(monHyg);
         monHyg.setLayout(monHygLayout);
         monHygLayout.setHorizontalGroup(
             monHygLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(monHygLayout.createSequentialGroup()
-                .addComponent(jComboBox16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jComboBox17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36))
         );
         monHygLayout.setVerticalGroup(
             monHygLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, monDenLayout.createSequentialGroup()
-                .addGap(0, 759, Short.MAX_VALUE)
-                .addGroup(monHygLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 759, Short.MAX_VALUE))
         );
 
         appointmentsHyg.add(monHyg);
 
         tueHyg.setBackground(new java.awt.Color(250, 250, 250));
         tueHyg.setPreferredSize(new java.awt.Dimension(100, 20));
-
-        jComboBox19.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31" }));
-        jComboBox20.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Jan", "Feb", "Mar", "Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec" }));
-        jComboBox21.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015"}));
         javax.swing.GroupLayout tueHygLayout = new javax.swing.GroupLayout(tueHyg);
         tueHyg.setLayout(tueHygLayout);
         tueHygLayout.setHorizontalGroup(
         tueHygLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addGroup(tueHygLayout.createSequentialGroup()
-              .addComponent(jComboBox19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(jComboBox20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-              .addComponent(jComboBox21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addGap(36, 36, 36))
+              .addGap(36, 36, 36)
         );
         tueHygLayout.setVerticalGroup(
             tueHygLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tueHygLayout.createSequentialGroup()
                 .addGap(0, 759, Short.MAX_VALUE)
-                .addGroup(tueHygLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(tueHygLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)))
         );
 
         appointmentsHyg.add(tueHyg);
         wedHyg.setPreferredSize(new java.awt.Dimension(100, 20));
-        jComboBox22.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31" }));
-        jComboBox23.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Jan", "Feb", "Mar", "Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec" }));
-        jComboBox24.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015"}));
 
         javax.swing.GroupLayout wedHygLayout = new javax.swing.GroupLayout(wedHyg);
         wedHyg.setLayout(wedHygLayout);
         wedHygLayout.setHorizontalGroup(
         wedHygLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(wedHygLayout.createSequentialGroup()
-            .addComponent(jComboBox22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(jComboBox23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-              .addComponent(jComboBox24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addGap(36, 36, 36))
+            .addGap(36, 36, 36))
         );
         wedHygLayout.setVerticalGroup(
             wedHygLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, wedHygLayout.createSequentialGroup()
                 .addGap(0, 759, Short.MAX_VALUE)
                 .addGroup(wedHygLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    ))
         );
 
         appointmentsHyg.add(wedHyg);
 
         thuHyg.setBackground(new java.awt.Color(250, 250, 250));
         thuHyg.setPreferredSize(new java.awt.Dimension(100, 20));
-        jComboBox25.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31" }));
-        jComboBox26.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Jan", "Feb", "Mar", "Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec" }));
-        jComboBox27.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015"}));
 
         javax.swing.GroupLayout thuHygLayout = new javax.swing.GroupLayout(thuHyg);
         thuHyg.setLayout(thuHygLayout);
         thuHygLayout.setHorizontalGroup(
             thuHygLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(thuHygLayout.createSequentialGroup()
-            .addComponent(jComboBox25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(jComboBox26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-              .addComponent(jComboBox27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
               .addGap(36, 36, 36))
         );
         thuHygLayout.setVerticalGroup(
@@ -723,28 +590,18 @@ public class Calendar extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, thuHygLayout.createSequentialGroup()
                 .addGap(0, 759, Short.MAX_VALUE)
                 .addGroup(thuHygLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    ))
         );
 
         appointmentsHyg.add(thuHyg);
 
         friHyg.setPreferredSize(new java.awt.Dimension(100, 20));
-        jComboBox28.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31" }));
-        jComboBox29.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Jan", "Feb", "Mar", "Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec" }));
-        jComboBox30.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015"}));
 
         javax.swing.GroupLayout friHygLayout = new javax.swing.GroupLayout(friHyg);
         friHyg.setLayout(friHygLayout);
         friHygLayout.setHorizontalGroup(
             friHygLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(friHygLayout.createSequentialGroup()
-            .addComponent(jComboBox28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(jComboBox29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-              .addComponent(jComboBox30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
               .addGap(36, 36, 36))
         );
         friHygLayout.setVerticalGroup(
@@ -752,9 +609,7 @@ public class Calendar extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, friHygLayout.createSequentialGroup()
                 .addGap(0, 759, Short.MAX_VALUE)
                 .addGroup(friHygLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    ))
         );
 
         appointmentsHyg.add(friHyg);
@@ -885,36 +740,6 @@ public class Calendar extends javax.swing.JFrame {
     private javax.swing.JPanel friDen;
     private javax.swing.JPanel friHyg;
     private javax.swing.JPanel hygienistCal;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox10;
-    private javax.swing.JComboBox jComboBox11;
-    private javax.swing.JComboBox jComboBox12;
-    private javax.swing.JComboBox jComboBox13;
-    private javax.swing.JComboBox jComboBox14;
-    private javax.swing.JComboBox jComboBox15;
-    private javax.swing.JComboBox jComboBox16;
-    private javax.swing.JComboBox jComboBox17;
-    private javax.swing.JComboBox jComboBox18;
-    private javax.swing.JComboBox jComboBox19;
-    private javax.swing.JComboBox jComboBox20;
-    private javax.swing.JComboBox jComboBox21;
-    private javax.swing.JComboBox jComboBox22;
-    private javax.swing.JComboBox jComboBox23;
-    private javax.swing.JComboBox jComboBox24;
-    private javax.swing.JComboBox jComboBox25;
-    private javax.swing.JComboBox jComboBox26;
-    private javax.swing.JComboBox jComboBox27;
-    private javax.swing.JComboBox jComboBox28;
-    private javax.swing.JComboBox jComboBox29;
-    private javax.swing.JComboBox jComboBox30;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
-    private javax.swing.JComboBox jComboBox4;
-    private javax.swing.JComboBox jComboBox5;
-    private javax.swing.JComboBox jComboBox6;
-    private javax.swing.JComboBox jComboBox7;
-    private javax.swing.JComboBox jComboBox8;
-    private javax.swing.JComboBox jComboBox9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
