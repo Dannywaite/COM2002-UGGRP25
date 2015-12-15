@@ -318,7 +318,7 @@ System.out.println("connectsuccess");
 //subscribePatient("Jonathan Gray","86","S10 1NU","Dental Repair", con);
 //unsubscribePatient("Jonathan Gray","86","S10 1NU",con);
 //addTreatment("Jonathan Gray","86","S10 1NU","Check-up", con);
-//getPatientId("Jonathan Gray","86","S10 1NU", con);
+//     getPatientId("Jonathan Gray","86","S10 1NU", con);
 //reviewTreatments("Jonathan Gray","86","S10 1NU", con);
 //patientPaid("Jonathan Gray","86","S10 1NU", con);
 }

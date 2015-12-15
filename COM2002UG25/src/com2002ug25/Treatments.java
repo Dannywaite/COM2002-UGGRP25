@@ -22,6 +22,10 @@ import java.util.logging.Logger;
 public class Treatments extends javax.swing.JFrame {
 public Statement stmt;
 public Connection con;
+    private int hygieneRem;
+    private int checkupRem;
+    private int repairRem;
+    private String patientPlan;
     /**
      * Creates new form Treatments
      */
@@ -52,6 +56,7 @@ public Connection con;
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Treatments");
@@ -86,18 +91,22 @@ public Connection con;
             }
         });
 
-        removeTreatment.setText("Remove Treatments");
+        removeTreatment.setText("Review");
+        removeTreatment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeTreatmentActionPerformed(evt);
+            }
+        });
 
         totalCost.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTextField1.setText(" ");
+        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField1.setToolTipText("");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
-
-        jTextField2.setText(" ");
 
         jTextField3.setToolTipText("");
 
@@ -151,6 +160,13 @@ public Connection con;
                     .addComponent(jButton1)))
         );
 
+        jButton2.setText("Paid");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
         menu.setLayout(menuLayout);
         menuLayout.setHorizontalGroup(
@@ -159,6 +175,8 @@ public Connection con;
                 .addComponent(addTreatment)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(removeTreatment)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(totalCost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -169,7 +187,8 @@ public Connection con;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addTreatment)
-                    .addComponent(removeTreatment)))
+                    .addComponent(removeTreatment)
+                    .addComponent(jButton2)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -192,6 +211,11 @@ public Connection con;
 
     private void addTreatmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTreatmentActionPerformed
         // TODO add your handling code here:
+                java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new AddTreatments().setVisible(true);
+            }
+        });
     }//GEN-LAST:event_addTreatmentActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -213,17 +237,17 @@ public Connection con;
             
         String name = jTextField1.getText();
         String hnum = jTextField2.getText();
-        String pcode = jTextField1.getText();
-     
+        String pcode = jTextField3.getText();
+        System.out.println(name+hnum+pcode);
         Statement stmt = null; 
         try {
         stmt = (Statement) con.createStatement(); // create from open connection
         String patientId = getPatientId(name,hnum,pcode,con);
 
-        ResultSet res2 = stmt.executeQuery("SELECT name FROM outstanding_treatments WHERE patientId = '"+patientId+"'");
+        ResultSet res1 = stmt.executeQuery("SELECT name FROM outstanding_treatments WHERE patientId = '"+patientId+"'");
         ArrayList <String> listOfTreatmentNames = new ArrayList();
-        while (res2.next()) {
-            listOfTreatmentNames.add(res2.getString(1));
+        while (res1.next()) {
+            listOfTreatmentNames.add(res1.getString(1));
         }
 
      //create a list of the costs of the treatments
@@ -236,8 +260,14 @@ public Connection con;
      }
 
      int totalTreatmentCost = listOfTreatmentCosts.stream().mapToInt(Integer::intValue).sum();
-System.out.println("Treatments: "+listOfTreatmentNames);
-     //    jTextArea1.setText
+     String everything = "Treatment         Cost \n";
+     for (int i=0; i < listOfTreatmentNames.size(); i++ ){
+        String treat = listOfTreatmentNames.get(i);
+        String cost = listOfTreatmentCosts.get(i).toString();
+        everything = everything + treat +"  -    £" + cost + "\n";
+     }
+        jTextArea1.setText("Treatments for patient: "+name+"\n"+everything+ "\n Total Cost: £"+ totalTreatmentCost);
+                
   //   System.out.println ("Costs: "+listOfTreatmentCosts);
   //  System.out.println ("Total: "+totalTreatmentCost);
 
@@ -252,6 +282,237 @@ System.out.println("Treatments: "+listOfTreatmentNames);
         });
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void removeTreatmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeTreatmentActionPerformed
+        String DB="jdbc:mysql://stusql.dcs.shef.ac.uk/team025?user=team025&password=a2dc8801";
+
+        Connection con = null; 
+        try { 
+        con = DriverManager.getConnection(DB);
+        System.out.println("connectsuccess");
+        }
+        catch (SQLException ex) {
+        ex.printStackTrace();
+        }       
+        
+        
+        String name = jTextField1.getText();
+        String hnum = jTextField2.getText();
+        String pcode = jTextField3.getText();
+             Statement stmt = null; 
+             try {
+             stmt = (Statement) con.createStatement(); // create from open connection
+             String patientId = getPatientId(name,hnum,pcode,con);
+
+             //create a list of the names of the treatments
+             ResultSet res2 = stmt.executeQuery("SELECT name FROM outstanding_treatments WHERE patientId = '"+patientId+"'");
+             ArrayList <String> listOfTreatmentNames = new ArrayList();
+             while (res2.next()) {
+                    listOfTreatmentNames.add(res2.getString(1));
+             }
+
+             //create a list of the costs of the treatments
+             ArrayList <Integer> listOfTreatmentCosts = new ArrayList();
+             for (String tName: listOfTreatmentNames){
+                 ResultSet res = stmt.executeQuery("SELECT cost FROM treatment_list WHERE name = '"+tName+"'");
+                 while (res.next()) {
+                    listOfTreatmentCosts.add(res.getInt(1));
+             }
+             }
+
+            //display treatments with costs and total cost
+             int totalTreatmentCost = listOfTreatmentCosts.stream().mapToInt(Integer::intValue).sum();
+             System.out.println ("Treatments: "+listOfTreatmentNames);
+             System.out.println ("Costs: "+listOfTreatmentCosts);
+             System.out.println ("Total: "+totalTreatmentCost);
+
+             //if patient doesnt't have a plan then treatment cost remains the same
+             ResultSet res4 = stmt.executeQuery("SELECT plan FROM patients WHERE patientId = '"+patientId+"'");
+             while (res4.next()) {
+             patientPlan = res4.getString(1);
+             }
+
+             if ("NULL".equals(patientPlan)){
+                 int modifiedTreatmentCost = totalTreatmentCost;
+                }
+
+             //create list of the treatment types
+             ArrayList <String> listOfTreatmentTypes = new ArrayList();
+             for (String tName: listOfTreatmentNames){
+                 ResultSet res = stmt.executeQuery("SELECT type FROM treatment_list WHERE name = '"+tName+"'");
+                 while (res.next()) {
+                    listOfTreatmentTypes.add(res.getString(1));
+             }
+             }
+
+             //create a list of the treatment IDs 
+             ArrayList <Integer> listOfTreatmentIds = new ArrayList();
+             ResultSet res5 = stmt.executeQuery("SELECT treatmentId FROM outstanding_treatments WHERE patientId = '"+patientId+"'");
+             while (res5.next()) {
+                    listOfTreatmentIds.add(res5.getInt(1));
+             }
+
+             //create a full detailed list of the treatments (possible to do first then use get methods? I don't know how yet)
+             ArrayList <Treatment> fullTreatmentList = new ArrayList();
+             for (int i = 0; i<listOfTreatmentIds.size(); i++){
+                 int d = listOfTreatmentIds.get(i);
+                 String n = listOfTreatmentNames.get(i);
+                 String t = listOfTreatmentTypes.get(i);
+                 int c = listOfTreatmentCosts.get(i);
+                 fullTreatmentList.add(new Treatment(d, n, t, c));
+               }
+
+             //get remaining coverage for the patient
+             ResultSet res6 = stmt.executeQuery("SELECT rem_checkup, rem_hygiene, rem_repair FROM patients WHERE patientId = '"+patientId+"'");
+             while (res6.next()) {
+              checkupRem = res6.getInt(1);
+              hygieneRem = res6.getInt(2);
+              repairRem = res6.getInt(3);
+             }
+
+             //create lists of treatments left to pay and treatments to remove from the database
+             ArrayList <Integer> listOfCostsOfTreatmentsToPay = new ArrayList();
+             ArrayList <Integer> listOfTreatmentsToRemove = new ArrayList();
+             for (Treatment t: fullTreatmentList){
+                 String type = t.getType();
+                 int c = t.getCost();
+                 int d = t.getTreatmentId();
+                 switch (type) {
+                        case "Check-up": if (checkupRem>0) {
+                            checkupRem--;
+                            listOfTreatmentsToRemove.add(d);
+                        }else{
+                            listOfCostsOfTreatmentsToPay.add(c);   
+                        };
+                        break;
+                        case "Hygiene": if (hygieneRem>0) {
+                            hygieneRem--;
+                            listOfTreatmentsToRemove.add(d);
+                        }else{
+                            listOfCostsOfTreatmentsToPay.add(c);   
+                        };
+                        break;
+                        case "Repair": if (repairRem>0) {
+                            repairRem--;
+                            listOfTreatmentsToRemove.add(d);
+                        }else{
+                            listOfCostsOfTreatmentsToPay.add(c);   
+                        };
+                        break;
+                        default: System.out.println("Invalid treatment type detected");
+                        break;
+                    }
+             }
+
+             //update remaining coverage values
+             stmt.executeUpdate("UPDATE patients SET rem_checkup = '"+(Integer.toString(checkupRem))+"', rem_hygiene = '"+(Integer.toString(hygieneRem))+"', rem_repair = '"+(Integer.toString(repairRem))+"' WHERE patientId = '"+patientId+"'");
+
+             //remove treatments that are paid for by coverage
+             for (int i=0; i<listOfTreatmentsToRemove.size(); i++){
+                 String d = Integer.toString(listOfTreatmentsToRemove.get(i));
+                 stmt.executeUpdate("DELETE FROM outstanding_treatments WHERE treatmentId = '"+d+"'");   
+             }
+
+             //compute new treatment cost
+             int modifiedTreatmentCost = listOfCostsOfTreatmentsToPay.stream().mapToInt(Integer::intValue).sum(); 
+
+             System.out.println ("Total inc. plan coverage: "+modifiedTreatmentCost);
+            }
+
+            catch (SQLException ex) {
+             ex.printStackTrace();
+            }
+            finally {
+             if (stmt != null) try {
+                 stmt.close();
+             } catch (SQLException ex) {
+                 Logger.getLogger(Treatments.class.getName()).log(Level.SEVERE, null, ex);
+             }
+            }
+///####################################################################################################///
+      
+          
+        System.out.println(name+hnum+pcode);
+        Statement stmt2 = null; 
+        try {
+        stmt2 = (Statement) con.createStatement(); // create from open connection
+        String patientId = getPatientId(name,hnum,pcode,con);
+
+        ResultSet res1 = stmt2.executeQuery("SELECT name FROM outstanding_treatments WHERE patientId = '"+patientId+"'");
+        ArrayList <String> listOfTreatmentNames = new ArrayList();
+        while (res1.next()) {
+            listOfTreatmentNames.add(res1.getString(1));
+        }
+
+     //create a list of the costs of the treatments
+     ArrayList <Integer> listOfTreatmentCosts = new ArrayList();
+     for (String tName: listOfTreatmentNames){
+         ResultSet res = stmt2.executeQuery("SELECT cost FROM treatment_list WHERE name = '"+tName+"'");
+         while (res.next()) {
+            listOfTreatmentCosts.add(res.getInt(1));
+     }
+     }
+
+     int totalTreatmentCost = listOfTreatmentCosts.stream().mapToInt(Integer::intValue).sum();
+     String everything = "Treatment         Cost \n";
+     for (int i=0; i < listOfTreatmentNames.size(); i++ ){
+        String treat = listOfTreatmentNames.get(i);
+        String cost = listOfTreatmentCosts.get(i).toString();
+        everything = everything + treat +"  -    £" + cost + "\n";
+     }
+        jTextArea1.setText("After application of plan-treatments for patient: "+name+"\n"+everything+ "\n Total Cost: £"+ totalTreatmentCost);
+                
+  //   System.out.println ("Costs: "+listOfTreatmentCosts);
+  //  System.out.println ("Total: "+totalTreatmentCost);
+
+
+
+    } catch (SQLException ex) {
+        Logger.getLogger(Treatments.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        
+    }//GEN-LAST:event_removeTreatmentActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String DB="jdbc:mysql://stusql.dcs.shef.ac.uk/team025?user=team025&password=a2dc8801";
+
+        Connection con = null; 
+        try { 
+        con = DriverManager.getConnection(DB);
+        System.out.println("connectsuccess");
+        }
+        catch (SQLException ex) {
+        ex.printStackTrace();
+        }       
+        
+        
+        String name = jTextField1.getText();
+        String hnum = jTextField2.getText();
+        String pcode = jTextField3.getText();
+        
+        
+        Statement stmt = null;
+            try {
+         //get patientID
+             stmt = (Statement) con.createStatement();
+            String patientId = getPatientId(name,hnum,pcode,con);
+            //delete all outstanding treatments for the patient
+            stmt.executeUpdate("DELETE FROM outstanding_treatments WHERE patientId = '"+patientId+"'");
+        }
+        catch (SQLException ex) {
+         ex.printStackTrace();
+        }
+        finally {
+         if (stmt != null) try {
+             stmt.close();
+         } catch (SQLException ex) {
+             Logger.getLogger(Treatments.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        }  
+        jTextArea1.setText("Treatments for patient: "+name+" have been paid for!");
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    
     /**
      * @param args the command line arguments
      */
@@ -284,6 +545,7 @@ System.out.println("Treatments: "+listOfTreatmentNames);
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addTreatment;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
