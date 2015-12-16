@@ -500,6 +500,11 @@ public class Menucal extends javax.swing.JFrame {
     }//GEN-LAST:event_PatientsActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        mon = "";
+        tues = "";
+        wed = "";
+        thurs = "";
+        fri = "";
         try {                                         
             String DB="jdbc:mysql://stusql.dcs.shef.ac.uk/team025?user=team025&password=a2dc8801";
             
@@ -522,6 +527,7 @@ public class Menucal extends javax.swing.JFrame {
             if(dayOfWeek!=2){
                 System.out.println("PLEASE SELECT A MONDAY");
             }else{
+
                 calendar.add(Calendar.DATE, 4);
                 String friday = sdfDate.format(calendar.getTime());
                 
@@ -557,6 +563,11 @@ public class Menucal extends javax.swing.JFrame {
                        String stime = a.getStartTime();
                        String durat = a.getDuration();
                        String treat = a.getTreatment();
+                        jTextArea1.setText(null);
+                        jTextArea2.setText(null);
+                        jTextArea3.setText(null);
+                        jTextArea4.setText(null);
+                        jTextArea5.setText(null);
                        if (2 == a.getDay()){
                           mon = mon  + "Start time: "+ stime+"\nDuration: " + durat + "\nTreatment: " + treat + "\nPatient: " + patientName +"\n \n";
                        }
@@ -573,7 +584,8 @@ public class Menucal extends javax.swing.JFrame {
                            fri = fri  + "Start time: "+ stime+"\nDuration: " + durat + "\nTreatment: " + treat + "\nPatient: " + patientName+"\n \n";
                        }
                        
-                    }                
+                    }
+                     
                      jTextArea1.setText(mon);
                      jTextArea4.setText(tues);
                      jTextArea5.setText(wed);

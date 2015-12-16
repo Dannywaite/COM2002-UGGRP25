@@ -35,14 +35,14 @@ public class UnsubFromPlan extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        jTextField1 = new javax.swing.JTextField(10);
+        jTextField2 = new javax.swing.JTextField(7);
+        jTextField3 = new javax.swing.JTextField(7);
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jButton1.setText("Unsubscribe");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -51,11 +51,11 @@ public class UnsubFromPlan extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setText("jTextField1");
+        jTextField1.setText("");
 
-        jTextField2.setText("jTextField2");
+        jTextField2.setText("");
 
-        jTextField3.setText("jTextField3");
+        jTextField3.setText("");
 
         jLabel1.setText("Patient Name");
 
