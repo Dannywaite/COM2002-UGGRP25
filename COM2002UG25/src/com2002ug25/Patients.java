@@ -143,7 +143,11 @@ public class Patients extends javax.swing.JFrame {
     }//GEN-LAST:event_regPatientActionPerformed
 
     private void treatmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_treatmentsActionPerformed
-        // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable(){
+            public void run(){
+                new Treatments().setVisible(true);
+            }
+        });
     }//GEN-LAST:event_treatmentsActionPerformed
     //THIS IS SUBSCRIBE
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
