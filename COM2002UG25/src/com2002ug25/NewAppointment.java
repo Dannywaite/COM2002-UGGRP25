@@ -21,8 +21,10 @@ import java.util.Calendar;
  * @author Peter
  */
 public class NewAppointment extends javax.swing.JFrame {
+    private static int appStartTime;
 public Statement stmt;
 public Connection con;
+    private String correctDurat;
     /**
      * Creates new form NewAppointment
      */
@@ -290,8 +292,13 @@ public Connection con;
        double durat= Double.parseDouble(duration.getText());
        int duratMins = (int)(durat%60);
        int duratHours = (int)((durat-duratMins)/60);
-       String correctDurat = Integer.toString(duratHours)+Integer.toString(duratMins)+"00";
-                      
+       System.out.println(Integer.toString(duratHours));
+       if (duratMins==0){
+           correctDurat = (Integer.toString(duratHours)+"0000");     
+       }
+       else{
+       correctDurat = Integer.toString(duratHours)+Integer.toString(duratMins)+"00";
+       }
        if (patientRadio.isSelected()==true){
            System.out.println(whichpartner+'-'+name+'-'+DOB+'-'+housenum+'-'+pcode+'-'+date+'-'+startTime +'-'+treatType+'-'+ correctDurat);
             
@@ -408,10 +415,18 @@ calendar.setTime(simpleDate);
 int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 System.out.println(dayOfWeek);
 if (appStartTime<90000 || appEndTime > 170000){
-    System.out.println("APPOINTMENTS ONLY AVAILABLE BETWEEN 9:00 and 17:00");
+            java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new AppointmentClash().setVisible(true);
+            }
+        });
     return true;
 }else if(dayOfWeek==7 || dayOfWeek==1){   
-    System.out.println("APPOINTMENTS ONLY AVAILABLE ON WEEKDAYS");
+            java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new AppointmentClash().setVisible(true);
+            }
+        });
     return true;
 }else{
 
@@ -435,6 +450,11 @@ if (name!=null){
          double bookedEndTime=bookedStartTime+Double.parseDouble(durations.get(i));       
          if (appStartTime<bookedEndTime && appEndTime>bookedStartTime){
              System.out.println("CLASH! with appointment at: "+startTimes.get(i));
+         java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new AppointmentClash().setVisible(true);
+            }
+        });
              return true;
          }
      }
@@ -464,6 +484,11 @@ if (name!=null){
          double bookedEndTime=bookedStartTime+Double.parseDouble(durations.get(i));   
          if (appStartTime<bookedEndTime && appEndTime>bookedStartTime){
              System.out.println("CLASH! with appointment at: "+startTimes.get(i));
+                     java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new AppointmentClash().setVisible(true);
+            }
+        });
              return true;
          }
      }
