@@ -54,8 +54,8 @@
         <Container class="javax.swing.JPanel" name="dentistCal">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Dentist">
-                <Property name="tabTitle" type="java.lang.String" value="Dentist"/>
+              <JTabbedPaneConstraints tabName="Calendar">
+                <Property name="tabTitle" type="java.lang.String" value="Calendar"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>

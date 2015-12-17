@@ -314,7 +314,7 @@ public class Menucal extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        allCalendars.addTab("Dentist", dentistCal);
+        allCalendars.addTab("Calendar", dentistCal);
 
         daysHyg.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -548,9 +548,9 @@ public class Menucal extends javax.swing.JFrame {
                         listOfAppointments.add(new Appointment(d,s,r,n,p,day));
                     }
                    for (Appointment a: listOfAppointments){
-                                      
+                        patientName = null;            
                         String patientId = a.getPatientId();
-                        if (patientId==null){a.setPatientId("HOLIDAY");
+                        if (patientId==null){patientName = "HOLIDAY";
                         }else{
                             stmt = (Statement) con.createStatement();
                             ResultSet res2 = stmt.executeQuery("SELECT name FROM patients WHERE patientId = '"+patientId+"'");

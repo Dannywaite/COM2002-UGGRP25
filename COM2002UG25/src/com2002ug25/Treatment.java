@@ -1,7 +1,7 @@
 package com2002ug25;
 
 /**
- *
+ * Class for handling treatments
  * @author aca14jg
  */
 public class Treatment {
